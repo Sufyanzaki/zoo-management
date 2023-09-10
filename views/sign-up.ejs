@@ -1,0 +1,902 @@
+<!-- meta tags and other links -->
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from template.viserlab.com/viserlife/demo/sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Sep 2023 07:00:45 GMT -->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viserlife - Zoo & Safari Park</title>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      href="assets/images/favicon.png"
+      sizes="16x16"
+      type="image/png"
+    />
+  <!-- bootstrap 5  -->
+  <link rel="stylesheet" href="assets/css/lib/bootstrap.min.css">
+  <!-- fontawesome 5  -->
+  <link rel="stylesheet" href="assets/css/lib/font-awesome.css" />
+  <!-- lineawesome font -->
+  <link rel="stylesheet" href="assets/css/lib/line-awesome.css" />
+  <!-- slick slider css -->
+  <link rel="stylesheet" href="assets/css/lib/slick.css" />
+  <!-- Magnific Popup  -->
+  <link rel="stylesheet" href="assets/css/lib/magnific-popup.css" />
+   <!-- Odometer -->
+   <link rel="stylesheet" href="assets/css/lib/odometer-theme-default.css">
+  <!-- main css -->
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+  <body>
+
+    <!-- preloader start -->
+    <div class="preloader">
+      <div class="preloader__loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <!-- preloader end -->
+    
+    <!-- Back To Top -->
+    <div class="back-to-top">
+      <span class="back-top">
+        <i class="las la-angle-double-up"></i>
+      </span>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- search Popup -->
+    <div class="body-overlay" id="body-overlay"></div>
+    <div class="search-popup" id="search-popup">
+      <form action="#" class="search-form">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search....." />
+        </div>
+        <button type="submit" class="submit-btn xl-text">
+          <i class="las la-search"></i>
+        </button>
+      </form>
+    </div>
+    <!--search Popup -->
+    <!-- Header Top  -->
+<div class="header-top d-none d-lg-block">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-4">
+        <ul class="list list--row">
+          <li>
+            <span class="d-block text--white">
+              <i class="far fa-clock"></i>
+            </span>
+          </li>
+          <li>
+            <span class="d-block text--white"> Hours : 10 am to 5pm <span class="d-none d-xxl-inline-block text--dark ps-2 fw-md"> Online Tickets Requred</span></span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 bg-dark text-center">
+        <!-- Logo  -->
+        <a href="index-2.html" class="logo mx-auto">
+          <img
+            src="assets/images/logo.png"
+            alt="viserhyip"
+            class="img-fluid logo__is"
+          />
+        </a>
+        <!-- Logo End -->
+      </div>
+      <div class="col-lg-4">
+          <ul class="list list--row justify-content-end">
+              <li>
+                <a href="sign-in.html" class="t-link t-link--light text--white list list--row align-items-center" style="--gap: .5rem;">
+                    <span class="d-block">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span class="d-block">Sign In</span>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Header Top End -->
+<!-- Header -->
+<header class="header-fixed header--secondary">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <div class="header--secondary-container">
+                <div class="row g-0 align-items-center">
+                    <div class="col-6 d-lg-none">
+                      <!-- Logo  -->
+                      <a href="index-2.html" class="logo">
+                        <img
+                          src="assets/images/logo.png"
+                          alt="viserhyip"
+                          class="img-fluid logo__is"
+                        />
+                      </a>
+                      <!-- Logo End -->
+                    </div>
+                    <div class="col-6 col-lg-12">
+                      <div class="nav-container">
+                        <!-- Navigation Toggler  -->
+                        <div class="d-flex justify-content-end align-items-center d-lg-none">
+                          <a
+                            href="#"
+                            class="primary-menu__link t-link search--toggler text-center text--white border-bottom-0"
+                          >
+                            <i class="las la-search"></i>
+                          </a>
+                          <button
+                            type="button"
+                            class="btn btn--sqr btn--base nav--toggle text--white"
+                          >
+                            <i class="las la-bars"></i>
+                          </button>
+                        </div>
+                        <!-- Navigation Toggler End -->
+              
+                        <!-- Navigation  -->
+                        <nav class="navs">
+                          <!-- Primary Menu  -->
+                          <ul class="list primary-menu">
+                            <li class="primary-menu__list has-sub">
+                              <a href="#" class="primary-menu__link text-capitalize">
+                                home
+                              </a>
+                              <ul class="primary-menu__sub">
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="index-2.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >Home 1</a
+                                  >
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="home-2.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >Home 2</a
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+              
+                            <li class="primary-menu__list has-sub">
+                              <a href="#" class="primary-menu__link text-capitalize">pages</a>
+                              <ul class="primary-menu__sub">
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="about.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    About
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="member.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Membership
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="animal.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Animals
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="animal-details.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Animal Details
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="event.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Events
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="event-details.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Event Details
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="event-ticket.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Event ticket
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="cart.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Cart
+                                  </a>
+                                </li>
+                              </ul>
+                            </li>
+              
+                            <li class="primary-menu__list has-sub">
+                              <a href="#" class="primary-menu__link text-capitalize"
+                                >Service</a
+                              >
+                              <ul class="primary-menu__sub">
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="service.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >Service</a
+                                  >
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="service-details.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >Service details</a
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="primary-menu__list has-sub">
+                              <a href="#" class="primary-menu__link text-capitalize">blog</a>
+                              <ul class="primary-menu__sub">
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="blog.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >blog</a
+                                  >
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="classic-blog.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >Classic blog</a
+                                  >
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="blog-details.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                    >blog details</a
+                                  >
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="primary-menu__list">
+                              <a
+                                href="contact.html"
+                                class="primary-menu__link text-capitalize"
+                                >Contact</a
+                              >
+                            </li>
+                            <li class="primary-menu__list has-sub">
+                              <a href="#" class="primary-menu__link text-capitalize"
+                                >others</a
+                              >
+                              <ul class="primary-menu__sub">
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="gallery.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Gallery
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="ticket.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Buy Ticket
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="faq.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    FAQ
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="policy.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Privacy & Policy
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="sign-in.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Sign in
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="sign-up.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    Sign Up
+                                  </a>
+                                </li>
+                                <li class="primary-menu__sub-list">
+                                  <a
+                                    href="error.html"
+                                    class="t-link primary-menu__sub-link text-capitalize"
+                                  >
+                                    404
+                                  </a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="primary-menu__list d-none d-lg-block">
+                              <a
+                                href="#"
+                                class="primary-menu__link t-link search--toggler text-center"
+                              >
+                                <i class="las la-search"></i>
+                              </a>
+                            </li>
+                          </ul>
+                          <!-- Primary Menu End -->
+              
+                          <!-- User Login  -->
+                          <div class="mx-3 ms-lg-auto me-lg-0">
+                            <ul class="list primary-menu primary-menu--alt">
+                              <li class="primary-menu__list text-center">
+                                <a href="sign-up.html" class="btn btn--md btn--base w-100">
+                                  Sign Up
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- User Login End -->
+                        </nav>
+                        <!-- Navigation End -->
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+  </div>
+</header>
+<!-- Header End -->
+
+
+    <!-- Banner  -->
+<div class="banner" style="background-image: url(assets/images/banner-img-2.png)">
+  <div class="banner__content">
+    <div class="container">
+      <div class="row g-3 justify-content-center">
+        <div class="col-lg-10 text-center">
+          <h2 class="mt-0 text--white">Sign Up</h2>
+          <!-- Breadcrumbs  -->
+          <ul
+            class="list list--row breadcrumbs justify-content-center"
+            style="--gap: 2rem"
+          >
+            <li class="list--row__item breadcrumbs__item">
+              <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                Home
+              </a>
+            </li>
+            <li class="list--row__item breadcrumbs__item">
+              <a
+                href="contact.html"
+                class="t-link breadcrumbs__link text--white"
+              >
+                Sign Up
+              </a>
+            </li>
+          </ul>
+          <!-- Breadcrumbs End -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Banner End -->
+
+    
+   <!-- Sign In Page  -->
+<div class="section__head">
+  <div class="section signup-section">
+    <div class="container">
+      <div class="row g-4 justify-content-center justify-content-xl-end">
+        <div class="col-md-8 col-xl-6 col-xxl-5">
+          <div class="login-form">
+            <h4 class="mt-0 text-center">Create your account</h4>
+            <p class="section__para mx-auto text-center">
+              Your gift to Viserlife Zoo plays an important role in our mission. Together, our footprint here in Viserlife translates to action across the globe
+            </p>
+            <form action="#" class="row g-4">
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="form-control form--control"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="col-12">
+                <input
+                  type="password"
+                  class="form-control form--control"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="col-12">
+                <input
+                  type="password"
+                  class="form-control form--control"
+                  placeholder="Confirm Password"
+                />
+              </div>
+              <div class="col-12">
+                <a
+                  href="#"
+                  class="t-link btn btn--xl btn--base w-100 sm-text text-uppercase"
+                >
+                  Create account
+                </a>
+              </div>
+              <div class="col-12">
+                <p class="mb-0 t-heading-font text-center">
+                  Don't have an account yet?
+                  <a
+                    href="#"
+                    class="t-link text--base t-link--base text-capitalize"
+                    >Create Account</a
+                  >
+                </p>
+              </div>
+              <div class="col-12">
+                <div class="divider">
+                  <span class="divider__content">OR</span>
+                </div>
+              </div>
+              <div class="col-12">
+                <p class="mb-3 t-heading-font text-center">
+                  Continue with social media
+                </p>
+                <ul
+                  class="list list--row flex-wrap justify-content-center align-items-center"
+                  style="--gap: 0.5rem"
+                >
+                  <li>
+                    <a
+                      href="#"
+                      class="t-link t-link--light icon icon--circle icon--xs bg--base text--white"
+                    >
+                      <i class="fab fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="t-link t-link--light icon icon--circle icon--xs bg--base text--white"
+                    >
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="t-link t-link--light icon icon--circle icon--xs bg--base text--white"
+                    >
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sign In Page End -->
+
+   <!-- Client Section  -->
+<div class="section--sm section--bottom">
+    <div class="container">
+        <div class="row g-4 g-sm-0 justify-content-center">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-1.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-2.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-3.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-4.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-5.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-6.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-7.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="client-card">
+                    <img src="assets/images/client-8.png" alt="image" class="client-card__img">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Client Section End -->
+
+    <!-- Subscribe Section  -->
+<div class="subscribe-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="subscribe-section__content">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+              <div class="text-center text-md-start d-grid gap-2">
+                <!-- Logo  -->
+                <a href="index-2.html" class="logo mx-auto ms-md-0">
+                  <img
+                    src="assets/images/logo-alt.png"
+                    alt="viserhyip"
+                    class="img-fluid logo__is"
+                  />
+                </a>
+                <!-- Logo End -->
+                
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="text-center text-md-end">
+                <h5 class="mt-0 text--white">Subscribe Our Newsletters</h5>
+                <div class="newsletter mx-auto ms-md-auto me-md-0">
+                  <div class="newsletter__container rounded-pill">
+                    <input
+                      type="text"
+                      class="form-control form--control newsletter__input flex-grow-1 rounded-pill"
+                      placeholder="Subscribe now.."
+                    />
+                    <button class="btn xxl-text lh-1 text--white rounded-pill sm-text">
+                        <i class="far fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Subscribe Section End -->
+
+    
+<!-- Footer  -->
+<footer class="footer">
+  <div class="section">
+    <div class="container">
+      <div class="row g-4 justify-content-xl-between">
+        <div class="col-md-6 col-lg-3">
+          <h4 class="info-section__title mt-0 text--white">Contact info</h4>
+          <ul class="list" style="--gap: .5rem;">
+            <li>
+              <div class="list list--row">
+                <span class="info-section__icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </span>
+                <p class="mb-0 text--white t-short-para">
+                  New York 10460 , Old city town
+                </p>
+              </div>
+            </li>
+            <li>
+              <div class="list list--row">
+                <span class="info-section__icon">
+                  <i class="far fa-envelope"></i>
+                </span>
+                <ul class="list" style="--gap: 0.5rem">
+                  <li>
+                    <p class="mb-0 text--white t-short-para">
+                      support24/7.com
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="list list--row">
+                <span class="info-section__icon">
+                  <i class="fas fa-phone-alt"></i>
+                </span>
+                <ul class="list" style="--gap: 0.5rem">
+                  <li>
+                    <p class="mb-0 text--white t-short-para">
+                      +123 - 456 - 789000
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <ul class="list list--row" style="--gap: .5rem;">
+                <li>
+                  <a href="#" class="t-link icon icon--circle icon--xs expert-card__icon">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="t-link icon icon--circle icon--xs expert-card__icon">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="t-link icon icon--circle icon--xs expert-card__icon">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="t-link icon icon--circle icon--xs expert-card__icon">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-lg-3 col-xl-2">
+          <h4 class="info-section__title mt-0 text--white">
+            Animals
+          </h4>
+          <ul class="list list--column">
+            <li class="list--column__item">
+              <a
+                href="about.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                About Us
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="faq.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                FAQ
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="member.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Membership
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="blog.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Blog
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="contact.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-lg-3 col-xl-2">
+          <h4 class="info-section__title mt-0 text--white">
+            Useful Link
+          </h4>
+          <ul class="list list--column">
+            <li class="list--column__item">
+              <a
+                href="animal.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Animals
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="animal-details.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+              Animals Details
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="event.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Events
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="event-details.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Event Details
+              </a>
+            </li>
+            <li class="list--column__item">
+              <a
+                href="cart.html"
+                class="t-link t-link--base text--white d-inline-block"
+              >
+                Cart
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-lg-3 col-xl-4">
+          <h4 class="info-section__title mt-0 text--white">
+            Opening Time
+          </h4>
+          <ul class="list list--underline">
+            <li>
+              <div class="list list--row justify-content-between">
+                <div
+                  class="list list--row align-items-center"
+                  style="--gap: 0.5rem"
+                >
+                  <span class="text--base">
+                    <i class="far fa-clock"></i>
+                  </span>
+                  <span class="d-inline-block text--white sm-text">
+                    10.00 AM
+                  </span>
+                </div>
+                <span class="d-inline-block text--white sm-text">
+                  Zoo Opens
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="list list--row justify-content-between">
+                <div
+                  class="list list--row align-items-center"
+                  style="--gap: 0.5rem"
+                >
+                  <span class="text--base">
+                    <i class="far fa-clock"></i>
+                  </span>
+                  <span class="d-inline-block text--white sm-text">
+                    03.45 PM
+                  </span>
+                </div>
+                <span class="d-inline-block text--white sm-text">
+                  Sea Lion Feeding
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="list list--row justify-content-between">
+                <div
+                  class="list list--row align-items-center"
+                  style="--gap: 0.5rem"
+                >
+                  <span class="text--base">
+                    <i class="far fa-clock"></i>
+                  </span>
+                  <span class="d-inline-block text--white sm-text">
+                    04.20 PM
+                  </span>
+                </div>
+                <span class="d-inline-block text--white sm-text">
+                  Exhibits Close
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="list list--row justify-content-between">
+                <div
+                  class="list list--row align-items-center"
+                  style="--gap: 0.5rem"
+                >
+                  <span class="text--base">
+                    <i class="far fa-clock"></i>
+                  </span>
+                  <span class="d-inline-block text--white sm-text">
+                    05.00 PM
+                  </span>
+                </div>
+                <span class="d-inline-block text--white sm-text">
+                  Zoo Close
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__copyright py-3">
+    <p class="mb-0 sm-text text--white text-center">
+      Copyright © 2022. All Rights Reserved By
+      <a href="#" class="t-link t-link--base text--base">Viserlife</a>
+    </p>
+  </div>
+</footer>
+<!-- Footer End -->
+      <!-- jQuery library -->
+  <script src="assets/js/lib/jquery-3.6.0.min.js"></script>
+  <!-- bootstrap 5 js -->
+  <script src="assets/js/lib/bootstrap.bundle.min.js"></script>
+  <!-- slick  slider js -->
+  <script src="assets/js/lib/slick.js"></script>
+   <!-- Viewport -->
+   <script src="assets/js/lib/viewport.js"></script>
+  <!-- Magnific Popup -->
+  <script src="assets/js/lib/jquery.magnific-popup.js"></script>
+  <!-- Filterizer -->
+  <script src="assets/js/lib/jquery.filterizr.min.js"></script>
+  <!-- Odometer -->
+  <script src="assets/js/lib/odometer.js"></script>
+
+    <!-- main js -->
+    <script src="assets/js/app.js"></script>
+  </body>
+
+<!-- Mirrored from template.viserlab.com/viserlife/demo/sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Sep 2023 07:00:45 GMT -->
+</html>
