@@ -3,9 +3,9 @@ export const homeView = async (req, res, next) => {
 };
 
 export const loginView = async (req, res, next) => {
-  res.render("sign-in");
+  res.render("sign-in", {errors : []});
 };
 
 export const signupView = async (req, res, next) => {
-  res.render("sign-up");
+  res.render("sign-up", {error : null});
 };

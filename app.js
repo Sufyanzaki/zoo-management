@@ -53,10 +53,9 @@ app.use(function (req, res, next) {
 import user from "./routes/userRoutes.js";
 import views from "./routes/viewRoutes.js";
 
+app.use(errorMiddleware);
+
 app.use("/", user);
 app.use("/", views);
-
-// Middleware for Errors
-app.use(errorMiddleware);
 
 export default app;

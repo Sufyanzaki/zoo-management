@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   
-<!-- Mirrored from template.viserlab.com/viserlife/demo/sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Sep 2023 07:00:45 GMT -->
+<!-- Mirrored from template.viserlab.com/viserlife/demo/signup by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Sep 2023 07:00:45 GMT -->
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,7 +94,7 @@
       <div class="col-lg-4">
           <ul class="list list--row justify-content-end">
               <li>
-                <a href="sign-in.html" class="t-link t-link--light text--white list list--row align-items-center" style="--gap: .5rem;">
+                <a href="login" class="t-link t-link--light text--white list list--row align-items-center" style="--gap: .5rem;">
                     <span class="d-block">
                         <i class="fas fa-user"></i>
                     </span>
@@ -333,7 +333,7 @@
                                 </li>
                                 <li class="primary-menu__sub-list">
                                   <a
-                                    href="sign-in.html"
+                                    href="login"
                                     class="t-link primary-menu__sub-link text-capitalize"
                                   >
                                     Sign in
@@ -341,7 +341,7 @@
                                 </li>
                                 <li class="primary-menu__sub-list">
                                   <a
-                                    href="sign-up.html"
+                                    href="signup"
                                     class="t-link primary-menu__sub-link text-capitalize"
                                   >
                                     Sign Up
@@ -372,7 +372,7 @@
                           <div class="mx-3 ms-lg-auto me-lg-0">
                             <ul class="list primary-menu primary-menu--alt">
                               <li class="primary-menu__list text-center">
-                                <a href="sign-up.html" class="btn btn--md btn--base w-100">
+                                <a href="signup" class="btn btn--md btn--base w-100">
                                   Sign Up
                                 </a>
                               </li>
@@ -439,12 +439,32 @@
             <p class="section__para mx-auto text-center">
               Your gift to Viserlife Zoo plays an important role in our mission. Together, our footprint here in Viserlife translates to action across the globe
             </p>
-            <form action="#" class="row g-4">
+            <% if (error) { %>
+              <div class="error-messages">
+                <ul>
+                  <li style="color: red;"><%= error %></li>
+                </ul>
+              </div>
+              <% } %>
+            <form class="row g-4" method="post" action="/signup">
               <div class="col-12">
                 <input
                   type="text"
                   class="form-control form--control"
+                  placeholder="Username"
+                  id="name"
+                  name="name"
+                  required
+                />
+              </div>
+              <div class="col-12">
+                <input
+                  type="email"
+                  class="form-control form--control"
                   placeholder="Email"
+                  id="email"
+                  name="email"
+                  required
                 />
               </div>
               <div class="col-12">
@@ -452,18 +472,14 @@
                   type="password"
                   class="form-control form--control"
                   placeholder="Password"
+                  id="password"
+                  name="password"
+                  required
                 />
               </div>
               <div class="col-12">
-                <input
-                  type="password"
-                  class="form-control form--control"
-                  placeholder="Confirm Password"
-                />
-              </div>
-              <div class="col-12">
-                <a
-                  href="#"
+                <button
+                  type="submit"
                   class="t-link btn btn--xl btn--base w-100 sm-text text-uppercase"
                 >
                   Create account
@@ -898,5 +914,5 @@
     <script src="/js/app.js"></script>
   </body>
 
-<!-- Mirrored from template.viserlab.com/viserlife/demo/sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Sep 2023 07:00:45 GMT -->
+<!-- Mirrored from template.viserlab.com/viserlife/demo/signup by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Sep 2023 07:00:45 GMT -->
 </html>
