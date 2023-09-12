@@ -22,8 +22,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload({
-  useTempFiles : true,
-  tempFileDir : '/tmp/'
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
 }));
 
 app.use(express.static(__dirname + '/public'));
@@ -51,11 +51,13 @@ app.use(function (req, res, next) {
 
 // Route Imports
 import user from "./routes/userRoutes.js";
+import ticket from "./routes/ticketRoutes.js";
 import views from "./routes/viewRoutes.js";
 
 app.use(errorMiddleware);
 
 app.use("/", user);
+app.use("/", ticket)
 app.use("/", views);
 
 export default app;
