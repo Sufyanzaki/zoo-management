@@ -2,12 +2,11 @@ import 'express-async-errors';
 import express from 'express';
 const app = express();
 import cookieParser from 'cookie-parser';
-import ejs from 'ejs';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import fileUpload from 'express-fileupload';
 import errorMiddleware from './middleware/error.js'
-// import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { fileURLToPath } from 'url';
 import path from 'path'
 
@@ -31,12 +30,12 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// cloudinary.config({ 
-//   cloud_name: 'dkfy6dxrg', 
-//   api_key: '113136512756865', 
-//   api_secret: 'CvdwBz2znMdv6SOHtf0ciAKpg_8',
-//   secure: false
-// });
+cloudinary.config({ 
+  cloud_name: 'dkfy6dxrg', 
+  api_key: '113136512756865', 
+  api_secret: 'CvdwBz2znMdv6SOHtf0ciAKpg_8',
+  secure: false
+});
 
 app.use(function (req, res, next) {
 
@@ -50,14 +49,16 @@ app.use(function (req, res, next) {
 });
 
 // Route Imports
-import user from "./routes/userRoutes.js";
-import ticket from "./routes/ticketRoutes.js";
-import views from "./routes/viewRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import ticketRoutes from "./routes/ticketRoutes.js";
+import viewsRoutes from "./routes/viewRoutes.js";
+import animalRoutes from "./routes/animalRoutes.js";
 
 app.use(errorMiddleware);
 
-app.use("/", user);
-app.use("/", ticket)
-app.use("/", views);
+app.use("/", userRoutes);
+app.use("/", ticketRoutes)
+app.use("/", viewsRoutes);
+app.use("/", animalRoutes);
 
 export default app;
