@@ -50,11 +50,11 @@
     document.getElementById("imageInput").click();
   }
 
-  function handleClick(index){
-    fetch('<%= '/removeImage/' + data._id %> '?index=' + index, {
-      method: 'GET'
-    })
-  }
+  function handleClick(index) {
+  fetch('/removeImage/<%= data?._id %>?index=' + index, {
+    method: 'GET'
+  });
+}
 
   let quill = new Quill("#editor", {
     theme: "snow", // or 'bubble' for a bubble theme

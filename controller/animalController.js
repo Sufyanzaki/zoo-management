@@ -63,8 +63,15 @@ export const updateAnimal = async (req, res, next) => {
 export const removeImages = async(req, res, next) =>{
   const animalId = req.params.id;
   const index = req.query.index;
-  const animal = await Animal.findById({
-    _id: animalId
-  });
-  console.log(animal.images[index])
+  try {
+    const animal = await Animal.findById(animalId);
+    if (index >= 0 && index < animal.images.length) {
+      animal.images.splice(index, 1);
+      await animal.save();
+      res.status(200).send('Success');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
