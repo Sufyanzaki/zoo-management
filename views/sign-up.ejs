@@ -1,116 +1,122 @@
-  <%- include('components/Header2.ejs'); %>
-    <!-- Banner  -->
-    <div class="banner" style="background-image: url(/images/banner-img-2.png)">
-      <div class="banner__content">
+<%- include('components/Layout/Header.ejs'); %>
+<!-- Banner  -->
+<div class="banner" style="background-image: url(/images/banner-img-2.png)">
+    <div class="banner__content">
         <div class="container">
-          <div class="row g-3 justify-content-center">
-            <div class="col-lg-10 text-center">
-              <h2 class="mt-0 text--white">Sign Up</h2>
-              <!-- Breadcrumbs  -->
-              <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
-                <li class="list--row__item breadcrumbs__item">
-                  <a href="index-2.html" class="t-link breadcrumbs__link text--white">
-                    Home
-                  </a>
-                </li>
-                <li class="list--row__item breadcrumbs__item">
-                  <a href="contact.html" class="t-link breadcrumbs__link text--white">
-                    Sign Up
-                  </a>
-                </li>
-              </ul>
-              <!-- Breadcrumbs End -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Banner End -->
-
-
-    <!-- Sign In Page  -->
-    <div class="section__head">
-      <div class="section signup-section">
-        <div class="container">
-          <div class="row g-4 justify-content-center justify-content-xl-end">
-            <div class="col-md-8 col-xl-6 col-xxl-5">
-              <div class="login-form">
-                <h4 class="mt-0 text-center">Create your account</h4>
-                <p class="section__para mx-auto text-center">
-                  Your gift to Viserlife Zoo plays an important role in our mission. Together, our footprint here in
-                  Viserlife translates to action across the globe
-                </p>
-                <% if (error) { %>
-                  <div class="error-messages">
-                    <ul>
-                      <li style="color: red;">
-                        <%= error %>
-                      </li>
+            <div class="row g-3 justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h2 class="mt-0 text--white">Sign Up</h2>
+                    <!-- Breadcrumbs  -->
+                    <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+                        <li class="list--row__item breadcrumbs__item">
+                            <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                                Home
+                            </a>
+                        </li>
+                        <li class="list--row__item breadcrumbs__item">
+                            <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                                Sign Up
+                            </a>
+                        </li>
                     </ul>
-                  </div>
-                  <% } %>
-                    <form class="row g-4" method="post" action="/signup">
-                      <div class="col-12">
-                        <input type="text" class="form-control form--control" placeholder="Username" id="name"
-                          name="name" required />
-                      </div>
-                      <div class="col-12">
-                        <input type="email" class="form-control form--control" placeholder="Email" id="email"
-                          name="email" required />
-                      </div>
-                      <div class="col-12">
-                        <input type="password" class="form-control form--control" placeholder="Password" id="password"
-                          name="password" required />
-                      </div>
-                      <div class="col-12">
-                        <button type="submit" class="t-link btn btn--xl btn--base w-100 sm-text text-uppercase">
-                          Create account
-                          </a>
-                      </div>
-                      <div class="col-12">
-                        <p class="mb-0 t-heading-font text-center">
-                          Don't have an account yet?
-                          <a href="#" class="t-link text--base t-link--base text-capitalize">Create Account</a>
-                        </p>
-                      </div>
-                      <div class="col-12">
-                        <div class="divider">
-                          <span class="divider__content">OR</span>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <p class="mb-3 t-heading-font text-center">
-                          Continue with social media
-                        </p>
-                        <ul class="list list--row flex-wrap justify-content-center align-items-center"
-                          style="--gap: 0.5rem">
-                          <li>
-                            <a href="#" class="t-link t-link--light icon icon--circle icon--xs bg--base text--white">
-                              <i class="fab fa-facebook-f"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#" class="t-link t-link--light icon icon--circle icon--xs bg--base text--white">
-                              <i class="fab fa-twitter"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#" class="t-link t-link--light icon icon--circle icon--xs bg--base text--white">
-                              <i class="fab fa-instagram"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </form>
-              </div>
+                    <!-- Breadcrumbs End -->
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <!-- Sign In Page End -->
+</div>
+<!-- Banner End -->
 
-    <!-- Client Section  -->
-    <%- include('components/ClientSection.ejs'); %>
-    <%- include('components/NewsLetter.ejs'); %>
-    <%- include('components/Footer.ejs'); %>
+
+<!-- Sign In Page  -->
+<div class="section__head">
+    <div class="section signup-section">
+        <div class="container">
+            <div class="row g-4 justify-content-center justify-content-xl-end">
+                <div class="col-md-8 col-xl-6 col-xxl-5">
+                    <div class="login-form">
+                        <h4 class="mt-0 text-center">Create your account</h4>
+                        <p class="section__para mx-auto text-center">
+                            Your gift to Viserlife Zoo plays an important role in our mission. Together, our footprint
+                            here in
+                            Viserlife translates to action across the globe
+                        </p>
+                        <% if (error) { %>
+                            <div class="error-messages">
+                                <ul>
+                                    <li style="color: red;">
+                                        <%= error %>
+                                    </li>
+                                </ul>
+                            </div>
+                        <% } %>
+                        <form class="row g-4" method="post" action="/signup">
+                            <div class="col-12">
+                                <input type="text" class="form-control form--control" placeholder="Username" id="name"
+                                       name="name" required/>
+                            </div>
+                            <div class="col-12">
+                                <input type="email" class="form-control form--control" placeholder="Email" id="email"
+                                       name="email" required/>
+                            </div>
+                            <div class="col-12">
+                                <input type="password" class="form-control form--control" placeholder="Password"
+                                       id="password"
+                                       name="password" required/>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="t-link btn btn--xl btn--base w-100 sm-text text-uppercase">
+                                    Create account
+                                    </a>
+                            </div>
+                            <div class="col-12">
+                                <p class="mb-0 t-heading-font text-center">
+                                    Don't have an account yet?
+                                    <a href="#" class="t-link text--base t-link--base text-capitalize">Create
+                                        Account</a>
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <div class="divider">
+                                    <span class="divider__content">OR</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="mb-3 t-heading-font text-center">
+                                    Continue with social media
+                                </p>
+                                <ul class="list list--row flex-wrap justify-content-center align-items-center"
+                                    style="--gap: 0.5rem">
+                                    <li>
+                                        <a href="#"
+                                           class="t-link t-link--light icon icon--circle icon--xs bg--base text--white">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="t-link t-link--light icon icon--circle icon--xs bg--base text--white">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="t-link t-link--light icon icon--circle icon--xs bg--base text--white">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Sign In Page End -->
+
+<!-- Client Section  -->
+<%- include('components/Layout/ClientSection.ejs'); %>
+<%- include('components/Layout/NewsLetter.ejs'); %>
+<%- include('components/Layout/Footer.ejs'); %>

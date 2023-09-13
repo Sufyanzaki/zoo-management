@@ -1,0 +1,113 @@
+<%- include('../components/Layout/Header.ejs'); %>
+<section class="py-5">
+    <div class="container">
+        <h2 class="section__title text-center mb-5">
+            <%= data ? 'Update' : 'Add' %> an <span>Animal</span>
+        </h2>
+        <form class="row g-4" method="POST" onsubmit="handleSubmit(event)">
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Animal Name" id="animalName"
+                       name="animalName" value="<%= data?.animalName %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="number" class="form-control form--control" placeholder="Total Fee" id="totalFree"
+                       name="totalFree" value="<%= data?.totalFee %>" required>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control form--control" placeholder="Ticket Details" id="ticketDetails"
+                       name="ticketDetails" value="<%= data?.ticketDetails %>" required>
+            </div>
+            <div class="col-12">
+                <div id="editor"></div>
+            </div>
+            <div class="col-12">
+                <i class="las la-image" style="font-size: 24px" onclick="openImageInput()"></i>
+                <input
+                        type="file"
+                        id="imageInput"
+                        multiple
+                        accept="image/*"
+                        onchange="handleImageUpload()"
+                        style="display: none;"
+                />
+            </div>
+            <div class="col-12">
+                <% for(let i=0;i<data?.images.length;i++){ %>
+                    <img src="<%= data.images[i] %>" alt="" onclick="handleClick(<%= i %>)"/>
+                <% } %>
+                <div id="imagePreview">
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn--md btn--base w-50 mx-auto">Submit</button>
+        </form>
+    </div>
+</section>
+<script src="/js/lib/quill.js"></script>
+<script>
+  function openImageInput() {
+    document.getElementById("imageInput").click();
+  }
+
+  function handleClick(index){
+    fetch('<%= '/removeImage/' + data._id %> '?index=' + index, {
+      method: 'GET'
+    })
+  }
+
+  let quill = new Quill("#editor", {
+    theme: "snow", // or 'bubble' for a bubble theme
+  });
+  let initialContent = '<%- data?.animalDetails %>';
+  quill.clipboard.dangerouslyPasteHTML(initialContent);
+
+  const imageInput = document.getElementById("imageInput");
+  const imageContainer = document.getElementById("imagePreview");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const animalName = document.getElementById("animalName").value;
+    const totalFee = document.getElementById("totalFree").value;
+    const ticketDetails = document.getElementById("ticketDetails").value;
+    const editorHtml = quill.root.innerHTML;
+    const selectedFiles = [...imageInput.files];
+    const myForm = new FormData();
+    const uploadPreset = "MERN SOCKET";
+    const cloudName = 'dkfy6dxrg'
+
+    selectedFiles.forEach((image, index) => {
+      const fileName = `${Date.now()}_${index}_${image.name}`;
+      myForm.append("upload_preset", uploadPreset);
+      myForm.append("cloud_name", cloudName);
+      myForm.append("name", fileName);
+      myForm.append("file", image);
+    });
+    myForm.append('animalDetails', editorHtml);
+    myForm.append('animalName', animalName);
+    myForm.append('totalFee', totalFee)
+    myForm.append('ticketDetails', ticketDetails)
+    fetch('<%= data ? '/animals/' + data._id : '/animals' %>', {
+      method: 'POST',
+      body: myForm,
+    })
+  }
+
+  function handleImageUpload() {
+    imageContainer.innerHTML = ''
+    for (let i = 0; i < imageInput.files.length; i++) {
+      const file = imageInput.files[i];
+
+      if (file.type.startsWith("image/")) {
+        const imageElement = document.createElement("img");
+        imageElement.src = URL.createObjectURL(file);
+        imageElement.classList.add("uploaded-image");
+        imageContainer.appendChild(imageElement);
+      }
+    }
+  }
+</script>
+<%- include('../components/Layout/ClientSection.ejs'); %>
+<%- include('../components/Layout/NewsLetter.ejs'); %>
+<%- include('../components/Layout/Footer.ejs'); %>
+

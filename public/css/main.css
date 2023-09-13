@@ -6269,3 +6269,7 @@ textarea.form--control:focus {
     }
 }
 /*# sourceMappingURL=main.css.map */
+/*patches*/
+.ql-container{
+    height: auto;
+}

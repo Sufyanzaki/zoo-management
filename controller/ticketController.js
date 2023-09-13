@@ -4,9 +4,9 @@ import Ticket from "./../model/ticketModel.js"
 export const createTicket = async (req, res) => {
     try {
         const ticket = await Ticket.create(req.body);
-        res.status(201).json(ticket);
+        return res.status(201).json(ticket);
     } catch (error) {
-        res.status(500).json({ error: 'Unable to create a ticket' });
+        return res.status(500).json({ error: 'Unable to create a ticket' });
     }
 };
 
@@ -14,9 +14,9 @@ export const createTicket = async (req, res) => {
 export const getTickets = async (req, res) => {
     try {
         const tickets = await Ticket.find();
-        res.status(200).json(tickets);
+        return res.status(200).json(tickets);
     } catch (error) {
-        res.status(500).json({ error: 'Unable to fetch tickets' });
+        return res.status(500).json({ error: 'Unable to fetch tickets' });
     }
 };
 
@@ -27,9 +27,9 @@ export const getTicketById = async (req, res) => {
         if (!ticket) {
             return res.status(404).json({ error: 'Ticket not found' });
         }
-        res.status(200).json(ticket);
+        return res.status(200).json(ticket);
     } catch (error) {
-        res.status(500).json({ error: 'Unable to fetch the ticket' });
+        return res.status(500).json({ error: 'Unable to fetch the ticket' });
     }
 };
 
@@ -42,9 +42,9 @@ export const updateTicket = async (req, res) => {
         if (!ticket) {
             return res.status(404).json({ error: 'Ticket not found' });
         }
-        res.status(200).json(ticket);
+        return res.status(200).json(ticket);
     } catch (error) {
-        res.status(500).json({ error: 'Unable to update the ticket' });
+        return res.status(500).json({ error: 'Unable to update the ticket' });
     }
 };
 
@@ -55,8 +55,8 @@ export const deleteTicket = async (req, res) => {
         if (!ticket) {
             return res.status(404).json({ error: 'Ticket not found' });
         }
-        res.status(204).json();
+        return res.status(204).json();
     } catch (error) {
-        res.status(500).json({ error: 'Unable to delete the ticket' });
+        return res.status(500).json({ error: 'Unable to delete the ticket' });
     }
 };

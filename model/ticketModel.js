@@ -21,21 +21,12 @@ const ticketSchema = new mongoose.Schema({
     expirationDate: {
         type: Date,
     },
-    visitor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // This should match the model name for the User schema
-    },
     zoo: {
         name: String,
         location: String,
-        // Add more zoo information properties as needed.
     },
     entryDateTime: {
         type: Date,
-    },
-    qrCode: {
-        type: String,
-        unique: true,
     },
     status: {
         type: String,
@@ -45,7 +36,6 @@ const ticketSchema = new mongoose.Schema({
     payment: {
         method: String,
         transactionID: String,
-        // Add more payment information properties as needed.
     },
     notes: {
         type: String,

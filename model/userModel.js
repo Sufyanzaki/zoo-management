@@ -21,11 +21,6 @@ const userSchema = new mongoose.Schema({
     minLength: [8, "Password should be greater than 8 characters"],
     select: false,
   },
-  pic: {
-    type: String,
-    required: true,
-    default: 'https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg'
-  },
   role: {
     type: String,
     default: "user",
@@ -33,10 +28,6 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  },
-  confirmed: {
-    type: 'Boolean',
-    default: false
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,

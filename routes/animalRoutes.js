@@ -1,12 +1,15 @@
 import express from 'express';
 import {
-    uploadImages
+    createAnimal, getAllAnimals, removeImages, updateAnimal
 } from "../controller/animalController.js";
 
 import { isAuthenticatedUser, authorizeRoles } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.route("/upload-images").post(uploadImages); //working
+router.route("/animals").get(isAuthenticatedUser, authorizeRoles('admin') ,getAllAnimals)
+  .post(isAuthenticatedUser, createAnimal); //working
 
+router.route("/animals/:id").post(isAuthenticatedUser, updateAnimal); //working
+router.route("/removeImage/:id").post(isAuthenticatedUser, removeImages); //working
 export default router;

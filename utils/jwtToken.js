@@ -10,7 +10,7 @@ const sendToken = (user, statusCode, res) => {
       withCredentials: true
     };
   
-    res.status(statusCode).cookie("token", token, options).redirect('/');
+    return res.status(statusCode).cookie("token", token, options).redirect('/');
   };
   
   export default sendToken;
