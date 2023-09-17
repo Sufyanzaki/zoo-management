@@ -12,7 +12,7 @@ export const registerUser = async (req, res, next) => {
     });
     sendToken(user, 200, res);
   } catch (error) {
-    res.render("sign-up", { error: error.errors.password.message });
+    res.render("sign-up", { error: error.errors.password.message, data:req.user });
   }
 };
 
@@ -32,7 +32,7 @@ export const loginUser = async (req, res, next) => {
     errors.push("Invalid email or password");
   }
   if (errors.length > 0) {
-    res.render("sign-in", { errors });
+    res.render("sign-in", { errors, data:req.user });
     return;
   }
   sendToken(user, 200, res);

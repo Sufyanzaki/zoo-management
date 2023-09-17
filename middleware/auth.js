@@ -3,18 +3,25 @@ import Jwt from 'jsonwebtoken';
 
 const {verify} = Jwt;
 
-export const isAuthenticatedUser = (async (req, res, next) => {
-  //auth token from cookies;
-  const {token} = req.cookies;
-
-  if (!token) {
-    return res.redirect('/login')
-  }
-
-  const decodedData = verify(token, process.env.JWT_SECRET);
-  req.user = await User.findById(decodedData.id);
-  next();
-});
+export const isAuthenticatedUser = (type) =>{
+  return (async (req, res, next) => {
+    //auth token from cookies;
+    const {token} = req.cookies;
+  
+    if (!token && type === 'strict') {
+      return res.redirect('/login')
+    }
+    else if(!token && type === 'default'){
+      req.user = null
+      next()
+    }
+    else{ // if token is here 
+      const decodedData = verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decodedData.id);
+      next();
+    }
+  });
+}
 
 export const authorizeRoles = (role) => {
   return (req, res, next) => {

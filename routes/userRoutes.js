@@ -16,6 +16,6 @@ router.route("/login").post(loginUser); //working
 
 router.route("/logout").get(logout); //working
 
-router.route("/me").get(isAuthenticatedUser, getUserDetails); //working
+router.route("/me").get(isAuthenticatedUser('strict'), getUserDetails); //working
 
 export default router;

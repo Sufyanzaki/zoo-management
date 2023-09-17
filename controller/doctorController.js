@@ -1,32 +1,23 @@
 import Doctor from "../model/doctorModel.js";
+import {uploadImages} from "../utils/GeneralFunctions.js";
 
 export const createDoctor = async (req, res, next) => {
   try {
-    const doctor = await Doctor.create(req.body);
-    return res.status(404).json({
-      message: doctor,
+    const file = req.files?.file || null;
+    const fileArr = await uploadImages(file);
+    await Doctor.create({
+      ...req.body,
+      image: `${fileArr[0]}`
     });
+    res.send('Success')
   } catch (error) {
-    return res.status(404).json({
-      message: error,
-    });
-  }
-}
-export const getAllDoctors = async (req, res, next) => {
-  try {
-    const doctors = await Doctor.find();
-    if (!doctors) {
-      return res.status(404).json({
-        message: "Doctor not found",
-      });
-    }
-    return res.status(404).json({
-      message: "Doctor found",
-    });
-  } catch (error) {
-    return res.status(404).json({
-      message: error
-    });
+    console.log(error)
+    res.render('error', {
+      errors: {
+        message: 'This Animal does not exist',
+        title: 'Animal not found'
+      }
+    })
   }
 }
 export const getSingleDoctor = async (req, res, next) => {
@@ -70,3 +61,19 @@ export const updateDoctor = async (req, res, next) => {
     });
   }
 };
+
+
+export const removeDoctor =async (req, res, next) => {
+  const doctorId = req.params.id;
+  try {
+    await Doctor.findByIdAndDelete(doctorId);
+    res.send('Success')
+  } catch (error) {
+    res.render('error', {
+      errors: {
+        message: 'This doctor does not exist',
+        title: 'doctor not found'
+      }
+    })
+  }
+}

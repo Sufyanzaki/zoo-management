@@ -1,0 +1,129 @@
+<%- include('../components/Layout/Header.ejs'); %>
+<section class="py-5">
+    <div class="container">
+        <h2 class="section__title text-center mb-5">
+            <%= data ? 'Update' : 'Add' %> a <span>Doctor</span>
+        </h2>
+        <form class="row g-4" method="POST" onsubmit="handleSubmit(event)">
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Doctor Name" id="name"
+                       name="name" value="<%= data?.name %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="number" class="form-control form--control" placeholder="License Number" id="licenseNumber"
+                       name="licenseNumber" value="<%= data?.licenseNumber %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Specialization" id="specialization"
+                       name="specialization" value="<%= data?.specialization %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="number" class="form-control form--control" placeholder="Experience" id="experience"
+                       name="experience" value="<%= data?.experience %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+            <input type="text" class="form-control form--control" placeholder="Education" id="education"
+                       name="education" value="<%= data?.education %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Contact Info" id="contactInfo"
+                       name="contactInfo" value="<%= data?.contactInfo %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Services Offered" id="servicesOffered"
+                       name="servicesOffered" value="<%= data?.servicesOffered %>" required>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Availability" id="availability"
+                       name="availability" value="<%= data?.availability %>" required>
+            </div>
+            <div class="col-12">
+                <i class="las la-image" style="font-size: 24px" onclick="openImageInput()"></i>
+                <input
+                        type="file"
+                        id="imageInput"
+                        multiple
+                        accept="image/*"
+                        onchange="handleImageUpload()"
+                        style="display: none;"
+                />
+            </div>
+            <div class="col-12">
+                <div class="loaded-images">
+                  <img src="<%= data.image %>" alt="" onclick="handleClick(0)"/>
+                </div>
+                <div id="imagePreview">
+
+                </div>
+            </div>
+            <button class="btn btn--md btn--base w-50 mx-auto" id="submit">Submit</button>
+        </form>
+    </div>
+</section>
+<script>
+  const imageInput = document.getElementById("imageInput");
+  const imageContainer = document.getElementById("imagePreview");
+
+  function openImageInput() {
+    document.getElementById("imageInput").click();
+  }
+  function handleSubmit(event) {
+    console.log('clicked')
+    event.preventDefault();
+    const submitBtn = document.getElementById('submit');
+    submitBtn.innerHTML = '<span>Uploading...</span>';
+
+    const name = document.getElementById('name').value;
+    const licenseNumber = document.getElementById('licenseNumber').value;
+    const specialization = document.getElementById('specialization').value;
+    const experience = document.getElementById('experience').value;
+    const education = document.getElementById('education').value;
+    const contactInfo = document.getElementById('contactInfo').value;
+    const servicesOffered = document.getElementById('servicesOffered').value;
+    const availability = document.getElementById('availability').value;
+
+    const selectedFiles = [...imageInput.files];
+    const myForm = new FormData();
+    const uploadPreset = "MERN SOCKET";
+    const cloudName = 'dkfy6dxrg'
+    const fileName = `${Date.now()}_${selectedFiles[0]?.name}`;
+    myForm.append("upload_preset", uploadPreset);
+    myForm.append("cloud_name", cloudName);
+    myForm.append("fileName", fileName);
+    myForm.append("file", selectedFiles[0]);
+
+    myForm.append('name', name);
+    myForm.append('licenseNumber', licenseNumber);
+    myForm.append('specialization', specialization);
+    myForm.append('experience', experience);
+    myForm.append('education', education);
+    myForm.append('contactInfo', contactInfo);
+    myForm.append('servicesOffered', servicesOffered);
+    myForm.append('availability', availability);
+
+    fetch('<%= data ? '/doctor/' + data._id : '/doctor' %>', {
+      method: 'POST',
+      body: myForm,
+    }).then(r=>{
+      submitBtn.innerHTML='<span>Submit</span>'
+      window.location.pathname = '/doctors'
+    })
+  }
+  function handleImageUpload() {
+    imageContainer.innerHTML = ''
+    for (let i = 0; i < imageInput.files.length; i++) {
+      const file = imageInput.files[i];
+
+      if (file.type.startsWith("image/")) {
+        const imageElement = document.createElement("img");
+        imageElement.src = URL.createObjectURL(file);
+        imageElement.classList.add("uploaded-image");
+        imageContainer.appendChild(imageElement);
+      }
+    }
+  }
+</script>
+<%- include('../components/Layout/ClientSection.ejs'); %>
+<%- include('../components/Layout/NewsLetter.ejs'); %>
+<%- include('../components/Layout/Footer.ejs'); %>
+

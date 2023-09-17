@@ -6273,3 +6273,13 @@ textarea.form--control:focus {
 .ql-container{
     height: auto;
 }
+.small-head h5{
+    font-size: 15px;
+    margin:0;
+}
+.small-head li.w-100{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+}

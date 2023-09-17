@@ -12,11 +12,11 @@ import {isAuthenticatedUser, authorizeRoles} from '../middleware/auth.js';
 const router = express.Router();
 
 // Create a new ticket
-router.route('/tickets').post(isAuthenticatedUser, authorizeRoles('admin'), createTicket)
-  .get(isAuthenticatedUser, authorizeRoles, getTickets);
+router.route('/tickets').post(isAuthenticatedUser('strict'), authorizeRoles('admin'), createTicket)
+  .get(isAuthenticatedUser('strict'), authorizeRoles, getTickets);
 
-router.route('/tickets/:id').get(isAuthenticatedUser, authorizeRoles, getTicketById)
-  .put(isAuthenticatedUser, authorizeRoles, updateTicket)
-  .delete(isAuthenticatedUser, deleteTicket);
+router.route('/tickets/:id').get(isAuthenticatedUser('strict'), authorizeRoles, getTicketById)
+  .put(isAuthenticatedUser('strict'), authorizeRoles, updateTicket)
+  .delete(isAuthenticatedUser('strict'), deleteTicket);
 
 export default router;

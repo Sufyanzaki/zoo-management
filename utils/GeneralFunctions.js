@@ -1,6 +1,9 @@
 import { v2 as cloudinary } from 'cloudinary'
+import Jwt from 'jsonwebtoken';
+const {verify} = Jwt;
 
 export const uploadImages=async(file)=>{
+  console.log(file)
   if(!file){
     return []
   }
@@ -18,4 +21,22 @@ export const uploadImages=async(file)=>{
     });
   }
   return arr
+}
+
+export const getUserFromToken=(token)=>{
+  return verify(token, process.env.JWT_SECRET)
+}
+
+export function formatDate(inputDate) {
+  if (!(inputDate instanceof Date)) {
+    inputDate = new Date(inputDate);
+  }
+  if (isNaN(inputDate.getTime())) {
+    return "Invalid Date";
+  }
+  const day = String(inputDate.getDate()).padStart(2, "0");
+  const month = String(inputDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const year = inputDate.getFullYear();
+  const formattedDate = `${day}/${month}/${year}`;
+  return formattedDate;
 }

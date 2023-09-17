@@ -75,3 +75,18 @@ export const removeImages = async(req, res, next) =>{
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+
+export const deleteAnimal = async (req, res, next) => {
+  const animalId = req.params.id;
+  try {
+    await Animal.findByIdAndDelete(animalId);
+    res.send('Success')
+  } catch (error) {
+    res.render('error', {
+      errors: {
+        message: 'This Animal does not exist',
+        title: 'Animal not found'
+      }
+    })
+  }
+}

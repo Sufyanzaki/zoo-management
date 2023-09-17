@@ -27,7 +27,7 @@ const errorMiddleware = (err, req, res, next) => {
     res.locals.errors = message;
   }
 
-  res.render('sign-in', { errors: res.locals.errors });
+  res.render('sign-in', { errors: res.locals.errors, data:req.user });
 };
 
 export default errorMiddleware;

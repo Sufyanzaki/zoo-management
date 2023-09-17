@@ -1,15 +1,15 @@
 import express from 'express';
 import {
-    createAnimal, getAllAnimals, removeImages, updateAnimal
+    createAnimal, removeImages, updateAnimal, deleteAnimal
 } from "../controller/animalController.js";
 
 import { isAuthenticatedUser, authorizeRoles } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.route("/animals").get(isAuthenticatedUser, authorizeRoles('admin') ,getAllAnimals)
-  .post(isAuthenticatedUser, createAnimal); //working
+router.route("/animals").post(isAuthenticatedUser('strict'), createAnimal); //working
 
-router.route("/animals/:id").post(isAuthenticatedUser, updateAnimal); //working
-router.route("/removeImage/:id").get(isAuthenticatedUser, removeImages); //working
+router.route("/animals/:id").post(isAuthenticatedUser('strict'), updateAnimal)
+  .delete(isAuthenticatedUser('strict'), deleteAnimal); //working
+router.route("/removeImage/:id").get(isAuthenticatedUser('strict'), removeImages); //working
 export default router;

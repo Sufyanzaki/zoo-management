@@ -32,28 +32,38 @@
                 />
             </div>
             <div class="col-12">
-                <% for(let i=0;i<data?.images.length;i++){ %>
-                    <img src="<%= data.images[i] %>" alt="" onclick="handleClick(<%= i %>)"/>
-                <% } %>
+                <div class="loaded-images">
+                    <% for(let i=0;i<data?.images.length;i++){ %>
+                        <img src="<%= data.images[i] %>" alt="" onclick="handleClick(<%= i %>)"/>
+                    <% } %>
+                </div>
                 <div id="imagePreview">
 
                 </div>
             </div>
 
-            <button type="submit" class="btn btn--md btn--base w-50 mx-auto">Submit</button>
+            <button type="submit" class="btn btn--md btn--base w-50 mx-auto" id="submit">Submit</button>
         </form>
     </div>
 </section>
 <script src="/js/lib/quill.js"></script>
 <script>
+  const imageInput = document.getElementById("imageInput");
+  const imageContainer = document.getElementById("imagePreview");
+
   function openImageInput() {
     document.getElementById("imageInput").click();
   }
 
   function handleClick(index) {
-  fetch('/removeImage/<%= data?._id %>?index=' + index, {
+    const spinner = document.querySelector('.spinner');
+    spinner.classList.add('show-spinner');
+    let imageContainer = document.querySelector(".loaded-images");
+    let imageToRemove = imageContainer.children[index];
+    imageContainer.removeChild(imageToRemove);
+    fetch('/removeImage/<%= data?._id %>?index=' + index, {
     method: 'GET'
-  });
+  }).then(e=>spinner.classList.remove('show-spinner'));
 }
 
   let quill = new Quill("#editor", {
@@ -62,10 +72,9 @@
   let initialContent = '<%- data?.animalDetails %>';
   quill.clipboard.dangerouslyPasteHTML(initialContent);
 
-  const imageInput = document.getElementById("imageInput");
-  const imageContainer = document.getElementById("imagePreview");
-
   function handleSubmit(event) {
+    const submitBtn = document.getElementById('submit');
+    submitBtn.innerHTML = '<span>Uploading...</span>';
     event.preventDefault();
     const animalName = document.getElementById("animalName").value;
     const totalFee = document.getElementById("totalFree").value;
@@ -90,6 +99,9 @@
     fetch('<%= data ? '/animals/' + data._id : '/animals' %>', {
       method: 'POST',
       body: myForm,
+    }).then(r=>{
+      submitBtn.innerHTML='<span>Submit</span>'
+      window.location.pathname = '/animals'
     })
   }
 
