@@ -47,6 +47,7 @@ export const updateDoctor = async (req, res, next) => {
     const doctorId = req.params.id;
     const doctor = await Doctor.findByIdAndUpdate(doctorId, {
       ...req.body,
+      _id:doctorId,
       image: `${fileArr[0]}`
     }, { new: true });
     if (!doctor) {

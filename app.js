@@ -53,9 +53,9 @@ import dotenv from "dotenv";
 
 app.use(errorMiddleware);
 
+app.use("/", viewsRoutes);
 app.use("/", userRoutes);
 app.use("/", ticketRoutes)
-app.use("/", viewsRoutes);
 app.use("/", animalRoutes);
 app.use("/", doctorRoutes);
 

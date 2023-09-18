@@ -16,14 +16,9 @@ const ticketSchema = new mongoose.Schema({
     },
     purchaseDate: {
         type: Date,
-        required: true,
     },
     expirationDate: {
         type: Date,
-    },
-    zoo: {
-        name: String,
-        location: String,
     },
     entryDateTime: {
         type: Date,

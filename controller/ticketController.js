@@ -4,8 +4,9 @@ import Ticket from "./../model/ticketModel.js"
 export const createTicket = async (req, res) => {
     try {
         const ticket = await Ticket.create(req.body);
-        return res.status(201).json(ticket);
+        return res.redirect('/tickets')
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error: 'Unable to create a ticket' });
     }
 };
@@ -35,6 +36,7 @@ export const getTicketById = async (req, res) => {
 
 // Update a ticket by ID
 export const updateTicket = async (req, res) => {
+    console.log(req.params.id, req.body)
     try {
         const ticket = await Ticket.findByIdAndUpdate(req.params.id, req.body, {
             new: true,

@@ -1,0 +1,73 @@
+<%- include('../components/Layout/Header.ejs'); %>
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section__title text-center mb-5">
+                <%= tickets ? 'Update' : 'Add' %> a <span>Ticket</span>
+            </h2>
+            <form class="row g-4" method="POST" onsubmit="handleSubmit(event)">
+                <div class="col-sm-6 col-12">
+                    <label for="ticketNumber">Ticket Number</label>
+                    <input type="text" class="form-control form--control" placeholder="Ticket Number" id="ticketNumber"
+                        name="ticketNumber" value="<%= tickets?.ticketNumber %>" required>
+                </div>
+                <div class="col-sm-6 col-12">
+                    <label for="ticketType">Ticket Type</label>
+                    <input type="" class="form-control form--control" placeholder="Ticket Type" id="ticketType"
+                        name="ticketType" value="<%= tickets?.ticketType %>" required>
+                </div>
+                <div class="col-sm-6 col-12">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control form--control" placeholder="Price" id="price" name="price"
+                        value="<%= tickets?.price %>" required>
+                </div>
+                <div class="col-sm-6 col-12">
+                    <label for="entryDateTime">Entry Date/Time</label>
+                    <input type="date" class="form-control form--control" placeholder="Entry Date-Time"
+                        id="entryDateTime" name="entryDateTime" value="<%= formatDbDate(tickets?.entryDateTime) %>"
+                        required>
+                </div>
+                <div class="col-12">
+                    <label for="notes">Notes</label>
+                    <textarea class="form-control form--control" placeholder="Notes" id="notes" name="notes"
+                        required><%= tickets?.notes %></textarea>
+                </div>
+                <button class="btn btn--md btn--base w-50 mx-auto" id="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+    <script>
+        function handleSubmit(event) {
+            const submitBtn = document.getElementById('submit');
+            submitBtn.innerHTML = '<span>Uploading...</span>';
+            event.preventDefault();
+            const ticketNumber = document.getElementById("ticketNumber").value;
+            const ticketType = document.getElementById("ticketType").value;
+            const price = document.getElementById("price").value;
+            const entryDateTime = document.getElementById("entryDateTime").value;
+            const notes = document.getElementById("notes").value;
+
+            const data = {
+                ticketNumber,
+                ticketType,
+                price,
+                entryDateTime,
+                notes,
+            };
+
+            const json = JSON.stringify(data);
+
+            fetch('<%= tickets ? '/tickets/' + tickets._id : '/tickets' %>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: json,
+            }).then(r => {
+                submitBtn.innerHTML = '<span>Submit</span>'
+                window.location.pathname = '/tickets'
+            })
+        }
+    </script>
+    <%- include('../components/Layout/ClientSection.ejs'); %>
+        <%- include('../components/Layout/NewsLetter.ejs'); %>
+            <%- include('../components/Layout/Footer.ejs'); %>

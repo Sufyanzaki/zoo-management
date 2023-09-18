@@ -1,6 +1,6 @@
 import express from 'express';
 import {
-  homeView, loginView, signupView, animalDetailView, animalsView, detailView, doctorView, createdoctorView
+  homeView, loginView, signupView, animalDetailView, animalsView, detailView, doctorView, createdoctorView, createTicketsView, ticketsView
 } from "../controller/viewController.js";
 
 import {isAuthenticatedUser, authorizeRoles} from '../middleware/auth.js';
@@ -16,5 +16,9 @@ router.route("/animal-detail/:id").get(isAuthenticatedUser('default'),detailView
 router.route("/doctors").get(isAuthenticatedUser('strict'), doctorView); //working
 router.route("/doctors/create").get(isAuthenticatedUser('strict'),createdoctorView); //working
 router.route("/doctors/:id").get(isAuthenticatedUser('strict'),createdoctorView); //working
+
+router.route("/tickets").get(isAuthenticatedUser('strict'), ticketsView); //working
+router.route("/tickets/create").get(isAuthenticatedUser('strict'),createTicketsView); //working
+router.route("/tickets/:id").get(isAuthenticatedUser('strict'),createTicketsView); //working
 
 export default router;

@@ -1,6 +1,7 @@
 import Animal from '../model/animalModel.js';
-import {formatDate} from "../utils/GeneralFunctions.js";
 import Doctor from "../model/doctorModel.js";
+import Ticket from '../model/ticketModel.js';
+import { formatDbDate } from '../utils/GeneralFunctions.js';
 
 export const homeView = async (req, res, next) => {
   res.render("index", {user : req.user});
@@ -61,7 +62,7 @@ export const detailView = async (req, res, next) => {
 
 export const doctorView = async (req, res, next)=>{
   const doctors = await Doctor.find();
-  res.render("doctors", {doctors, error:null, user:req.user});
+  res.render("admin/doctors", {doctors, error:null, user:req.user});
 }
 
 export const createdoctorView = async (req, res, next)=>{
@@ -73,4 +74,20 @@ export const createdoctorView = async (req, res, next)=>{
     res.render("admin/createDoctor", {data:doctor, error:null, user:req.user});
   }
   res.render("admin/createDoctor", {data:null, error:null, user:req.user});
+}
+
+export const createTicketsView = async(req, res, next)=>{
+  const ticketId = req.params.id;
+  if(ticketId){
+    let tickets = await Ticket.findById({
+      _id:ticketId
+    })
+    res.render("admin/createTicket", {tickets, error:null, user:req.user, formatDbDate});
+  }
+  res.render("admin/createTicket", {tickets:null, error:null,user:req.user, formatDbDate});
+}
+
+export const ticketsView = async(req, res, next)=>{
+  const tickets = await Ticket.find();
+  res.render("admin/tickets", {user : req.user, tickets});
 }

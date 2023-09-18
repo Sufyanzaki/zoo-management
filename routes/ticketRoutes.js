@@ -15,8 +15,8 @@ const router = express.Router();
 router.route('/tickets').post(isAuthenticatedUser('strict'), authorizeRoles('admin'), createTicket)
   .get(isAuthenticatedUser('strict'), authorizeRoles, getTickets);
 
-router.route('/tickets/:id').get(isAuthenticatedUser('strict'), authorizeRoles, getTicketById)
-  .put(isAuthenticatedUser('strict'), authorizeRoles, updateTicket)
+router.route('/tickets/:id').get(isAuthenticatedUser('strict'), authorizeRoles('admin'), getTicketById)
+  .post(isAuthenticatedUser('strict'), authorizeRoles('admin'), updateTicket)
   .delete(isAuthenticatedUser('strict'), deleteTicket);
 
 export default router;

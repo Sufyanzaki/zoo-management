@@ -1,0 +1,123 @@
+<%- include('../components/Layout/Header.ejs'); %>
+
+  <!-- Banner  -->
+  <div class="banner" style="background-image: url(/images/banner-img-1.png)">
+    <div class="banner__content">
+      <div class="container">
+        <div class="row g-3 justify-content-center">
+          <div class="col-lg-10 text-center">
+            <h2 class="mt-0 text--white">Ticket</h2>
+            <!-- Breadcrumbs  -->
+            <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+              <li class="list--row__item breadcrumbs__item">
+                <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                  Home
+                </a>
+              </li>
+              <li class="list--row__item breadcrumbs__item">
+                <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                  Tickets
+                </a>
+              </li>
+            </ul>
+            <!-- Breadcrumbs End -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner End -->
+
+
+  <!-- Zoo Gallery  -->
+  <div class="section--sm section--top">
+    <div class="section__head">
+      <div class="container">
+        <a href="/tickets/create" class="btn btn--md btn--base w-25 d-block mb-4 ms-auto">Add Ticket</a>
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="table-responsive--md">
+              <table class="table custom--table">
+                <thead>
+                  <tr>
+                    <th>Ticket Number</th>
+                    <th>Ticket Type</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(let i=0;i < tickets.length;i++){ %>
+                    <tr id="row_<%= i %>">
+                      <td tickets-label="Ticket Number">
+                        <strong>
+                          <%= tickets[i].ticketNumber %>
+                        </strong>
+                      </td>
+                      <td tickets-label="Ticket Type">
+                        <%= tickets[i].ticketType %>
+                      </td>
+                      <td tickets-label="Price">
+                        <%= tickets[i].price %>PKR
+                      </td>
+                      <td tickets-label="Status">
+                        <%= tickets[i].status %>
+                      </td>
+                      <td tickets-label="Remove" class="text-center">
+                        <a href="tickets/<%= tickets[i]._id %>" class="btn btn--sm btn--base"> Edit </a>
+                        <button class="btn btn--sm btn--base"
+                          onclick="removeRow(<%= i %>, '<%= tickets[i]._id %>')">Remove</button>
+                      </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav>
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function removeRow(index, id) {
+    fetch(`/tickets/${id}`, {
+      method: 'DELETE',
+    }).then(response => {
+        if (response.ok) {
+          const rowToRemove = document.getElementById(`row_${index}`);
+          if (rowToRemove) {
+            rowToRemove.remove();
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      })}
+</script>
+  <%- include('../components/Layout/ClientSection.ejs'); %>
+    <%- include('../components/Layout/NewsLetter.ejs'); %>
+      <%- include('../components/Layout/Footer.ejs'); %>
