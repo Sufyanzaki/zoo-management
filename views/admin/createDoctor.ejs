@@ -50,7 +50,7 @@
             </div>
             <div class="col-12">
                 <div class="loaded-images">
-                  <img src="<%= data.image %>" alt="" onclick="handleClick(0)"/>
+                  <img src="<%= data?.image %>" alt="" onclick="handleClick(0)"/>
                 </div>
                 <div id="imagePreview">
 
@@ -122,6 +122,17 @@
       }
     }
   }
+
+  function handleClick(index) {
+    const spinner = document.querySelector('.spinner');
+    spinner.classList.add('show-spinner');
+    let imageContainer = document.querySelector(".loaded-images");
+    let imageToRemove = imageContainer.children[index];
+    imageContainer.removeChild(imageToRemove);
+    fetch('/doctorImage/<%= data?._id %>', {
+    method: 'GET'
+  }).then(e=>spinner.classList.remove('show-spinner'));
+}
 </script>
 <%- include('../components/Layout/ClientSection.ejs'); %>
 <%- include('../components/Layout/NewsLetter.ejs'); %>

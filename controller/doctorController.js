@@ -1,5 +1,5 @@
 import Doctor from "../model/doctorModel.js";
-import {uploadImages} from "../utils/GeneralFunctions.js";
+import { uploadImages } from "../utils/GeneralFunctions.js";
 
 export const createDoctor = async (req, res, next) => {
   try {
@@ -42,9 +42,13 @@ export const getSingleDoctor = async (req, res, next) => {
 };
 export const updateDoctor = async (req, res, next) => {
   try {
+    const file = req.files?.file || null;
+    const fileArr = await uploadImages(file);
     const doctorId = req.params.id;
-    const updatedDoctor = req.body;
-    const doctor = await Doctor.findByIdAndUpdate(doctorId, updatedDoctor, { new: true });
+    const doctor = await Doctor.findByIdAndUpdate(doctorId, {
+      ...req.body,
+      image: `${fileArr[0]}`
+    }, { new: true });
     if (!doctor) {
       return res.status(404).json({
         message: "Doctor not found",
@@ -63,7 +67,7 @@ export const updateDoctor = async (req, res, next) => {
 };
 
 
-export const removeDoctor =async (req, res, next) => {
+export const removeDoctor = async (req, res, next) => {
   const doctorId = req.params.id;
   try {
     await Doctor.findByIdAndDelete(doctorId);
@@ -75,5 +79,20 @@ export const removeDoctor =async (req, res, next) => {
         title: 'doctor not found'
       }
     })
+  }
+}
+
+export const removeImages = async (req, res, next) => {
+  const userId = req.params.id;
+  try {
+    const doctor = await Doctor.findById(userId);
+    console.log(doctor)
+    doctor.image = '';
+    await doctor.save();
+    res.status(200).send('Success');
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }

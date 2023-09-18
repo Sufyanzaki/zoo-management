@@ -14,7 +14,7 @@ router.route("/animal-details").get(isAuthenticatedUser('default'), animalDetail
 router.route("/animal-details/:id").get(isAuthenticatedUser('default'),animalDetailView); //working
 router.route("/animal-detail/:id").get(isAuthenticatedUser('default'),detailView); //working
 router.route("/doctors").get(isAuthenticatedUser('strict'), doctorView); //working
-router.route("/doctors/create").get(createdoctorView); //working
-router.route("/doctors/:id").get(createdoctorView); //working
+router.route("/doctors/create").get(isAuthenticatedUser('strict'),createdoctorView); //working
+router.route("/doctors/:id").get(isAuthenticatedUser('strict'),createdoctorView); //working
 
 export default router;

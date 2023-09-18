@@ -127,7 +127,7 @@
                 <li class="primary-menu__list">
                   <a href="contact.html" class="primary-menu__link text-capitalize">Contact</a>
                 </li>
-                <% if(data?.role === 'admin'){ %>
+                <% if(user?.role === 'admin'){ %>
                   <li class="primary-menu__list has-sub">
                     <a href="#" class="primary-menu__link text-capitalize">Admin</a>
                     <ul class="primary-menu__sub">
@@ -142,7 +142,7 @@
                         </a>
                       </li>
                       <li class="primary-menu__sub-list">
-                        <a href="doctors" class="t-link primary-menu__sub-link text-capitalize">
+                        <a href="/doctors" class="t-link primary-menu__sub-link text-capitalize">
                           Doctors
                         </a>
                       </li>
@@ -161,11 +161,12 @@
               <div class="mx-3 ms-lg-auto me-lg-0">
                 <ul class="list primary-menu primary-menu--alt">
                   <li class="primary-menu__list text-center">
-                    <% if(data){ %>
+                    <% if(user){ %>
                       <a href="logout" class="btn btn--md btn--base w-100"> Logout </a>
                       <% }else{%>
                         <!-- add login button here -->
-                      <a href="signup" class="btn btn--md btn--base w-100"> Sign Up </a>
+                      <a href="signup" class="btn btn--md btn--base w-fit"> Sign Up </a>
+                      <a href="login" class="btn btn--md btn--base w-fit"> Login </a>
                         <% } %>
                   </li>
                 </ul>
