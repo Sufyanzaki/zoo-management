@@ -36,6 +36,7 @@
         <a href="/doctors/create" class="btn btn--md btn--base w-25 d-block mb-4 ms-auto">Add Doctor</a>
         <div class="row g-4">
           <div class="col-12">
+            <% if(doctors.length > 0){ %>
             <div class="table-responsive--md">
               <table class="table custom--table">
                 <thead>
@@ -74,50 +75,61 @@
                 </tbody>
               </table>
             </div>
+            <% }else{ %>
+              <h2 class="section__title mt-0 text-center">
+                <span>OOPS!</span>
+                No tickets yet!
+            </h2>
+              <% } %>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav>
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+    <% if(totalPages> 1){ %>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="mt-5">
+              <ul class="pagination justify-content-center">
+                <% if(currentPage !==1){ %>
+                  <li class="page-item">
+                    <a class="page-link" href="/doctors?page=<%= currentPage-1 %>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <% } %>
+                    <% for(let i=1;i<=totalPages;i++){%>
+                      <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>"
+                          href="/doctors?page=<%= i %>">
+                          <%= i %>
+                        </a></li>
+                      <% } %>
+                        <% if(currentPage !==totalPages){ %>
+                          <li class="page-item">
+                            <a class="page-link" href="/doctors?page=<%= currentPage+1 %>" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                          <% } %>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
-    </div>
+      <% } %>
   </div>
   <script>
     function removeRow(index, id) {
-    fetch(`/doctor/${id}`, {
-      method: 'DELETE',
-    }).then(response => {
-        if (response.ok) {
-          const rowToRemove = document.getElementById(`row_${index}`);
-          if (rowToRemove) {
-            rowToRemove.remove();
-          }
-        }
+      fetch(`/doctor/${id}`, {
+        method: 'DELETE',
+      }).then(response => {
+        window.location.reload();
       })
-      .catch(error => {
-        console.error('Error:', error);
-      })}
-</script>
+        .catch(error => {
+          console.error('Error:', error);
+        })
+    }
+  </script>
   <%- include('../components/Layout/ClientSection.ejs'); %>
     <%- include('../components/Layout/NewsLetter.ejs'); %>
       <%- include('../components/Layout/Footer.ejs'); %>

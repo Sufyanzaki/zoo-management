@@ -1,101 +1,133 @@
 <%- include('../components/Layout/Header.ejs'); %>
-<div class="banner" style="background-image: url(images/banner-img-3.png)">
+  <div class="banner" style="background-image: url(images/banner-img-3.png)">
     <div class="banner__content">
-        <div class="container">
-            <div class="row g-3 justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h2 class="mt-0 text--white">All Animals</h2>
-                    <!-- Breadcrumbs  -->
-                    <ul
-                            class="list list--row breadcrumbs justify-content-center"
-                            style="--gap: 2rem"
-                    >
-                        <li class="list--row__item breadcrumbs__item">
-                            <a href="index-2.html" class="t-link breadcrumbs__link text--white">
-                                Home
-                            </a>
-                        </li>
-                        <li class="list--row__item breadcrumbs__item">
-                            <a
-                                    href="contact.html"
-                                    class="t-link breadcrumbs__link text--white"
-                            >
-                                All Animals
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- Breadcrumbs End -->
-                </div>
-            </div>
+      <div class="container">
+        <div class="row g-3 justify-content-center">
+          <div class="col-lg-10 text-center">
+            <h2 class="mt-0 text--white">All Animals</h2>
+            <!-- Breadcrumbs  -->
+            <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+              <li class="list--row__item breadcrumbs__item">
+                <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                  Home
+                </a>
+              </li>
+              <li class="list--row__item breadcrumbs__item">
+                <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                  All Animals
+                </a>
+              </li>
+            </ul>
+            <!-- Breadcrumbs End -->
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<!-- Banner End -->
+  </div>
+  <!-- Banner End -->
 
 
-<!-- Ticket  -->
-<div class="section--sm section--top">
+  <!-- Ticket  -->
+  <div class="section--sm section--top">
     <div class="container">
-        <a href="/animal-details" class="btn btn--md btn--base w-25 d-block mb-4 ms-auto">Add Animal</a>
-        <div class="row g-4">
-            <div class="col-12">
-                <div class="table-responsive--md">
-                    <table class="table custom--table">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Ticket Details</th>
-                            <th>Date</th>
-                            <th>Total Fee</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% for(let i = 0;i < data.length;i++){ %>
-                            <tr id="row_<%= i %>">
-                                <td data-label="Name">
-                                    <strong><%= data[i].animalName %></strong>
-                                </td>
-                                <td data-label="Ticket Details">
-                                    <%= data[i].ticketDetails %>
-                                </td>
-                                <td data-label="Date">
-                                    <%= formatDate(data[i].createdAt) %>
-                                </td>
-                                <td data-label="Total Fee">
-                                    $<%= data[i].totalFee %>
-                                </td>
-                                <td data-label="Remove" class="text-center">
-                                    <a href="animal-details/<%= data[i]._id %>" class="btn btn--sm btn--base"> Edit </a>
-                                    <button class="btn btn--sm btn--base"
-                                            onclick="removeRow(<%= i %>, '<%= data[i]._id %>')">Remove</button>
-                                </td>
-                            </tr>
-                        <% } %>
-                        </tbody>
-                    </table>
-                </div>
+      <a href="/animal-details" class="btn btn--md btn--base w-25 d-block mb-4 ms-auto">Add Animal</a>
+      <div class="row g-4">
+        <div class="col-12">
+          <% if(data.length > 0){ %>
+            <div class="table-responsive--md">
+              <table class="table custom--table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Ticket Details</th>
+                    <th>Date</th>
+                    <th>Total Fee</th>
+                    <th class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(let i=0;i < data.length;i++){ %>
+                    <tr id="row_<%= i %>">
+                      <td data-label="Name">
+                        <strong>
+                          <%= data[i].animalName %>
+                        </strong>
+                      </td>
+                      <td data-label="Ticket Details">
+                        <%= data[i].ticketDetails %>
+                      </td>
+                      <td data-label="Date">
+                        <%= formatDate(data[i].createdAt) %>
+                      </td>
+                      <td data-label="Total Fee">
+                        $<%= data[i].totalFee %>
+                      </td>
+                      <td data-label="Remove" class="text-center">
+                        <a href="animal-details/<%= data[i]._id %>" class="btn btn--sm btn--base"> Edit </a>
+                        <button class="btn btn--sm btn--base"
+                          onclick="removeRow(<%= i %>, '<%= data[i]._id %>')">Remove</button>
+                      </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+              </table>
             </div>
+            <% }else{ %>
+              <h2 class="section__title mt-0 text-center">
+                <span>OOPS!</span>
+                No Animals yet!
+              </h2>
+              <% } %>
         </div>
+      </div>
     </div>
-</div>
+
+    <% if(totalPages> 1){ %>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="mt-5">
+              <ul class="pagination justify-content-center">
+                <% if(currentPage !==1){ %>
+                  <li class="page-item">
+                    <a class="page-link" href="/animals?page=<%= currentPage-1 %>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <% } %>
+                    <% for(let i=1;i<=totalPages;i++){%>
+                      <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>"
+                          href="/animals?page=<%= i %>">
+                          <%= i %>
+                        </a></li>
+                      <% } %>
+                        <% if(currentPage !==totalPages){ %>
+                          <li class="page-item">
+                            <a class="page-link" href="/animals?page=<%= currentPage+1 %>" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                          <% } %>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>
   <script>
     function removeRow(index, id) {
-    fetch(`/animals/${id}`, {
-      method: 'DELETE',
-    }).then(response => {
-        if (response.ok) {
-          const rowToRemove = document.getElementById(`row_${index}`);
-          if (rowToRemove) {
-            rowToRemove.remove();
-          }
-        }
+      fetch(`/animals/${id}`, {
+        method: 'DELETE',
+      }).then(response => {
+        window.location.reload();
       })
-      .catch(error => {
-        console.error('Error:', error);
-      })}
-</script>
+        .catch(error => {
+          console.error('Error:', error);
+        })
+    }
+  </script>
 
-<%- include('../components/Layout/ClientSection.ejs'); %>
-<%- include('../components/Layout/NewsLetter.ejs'); %>
-<%- include('../components/Layout/Footer.ejs'); %>
+  <%- include('../components/Layout/ClientSection.ejs'); %>
+    <%- include('../components/Layout/NewsLetter.ejs'); %>
+      <%- include('../components/Layout/Footer.ejs'); %>

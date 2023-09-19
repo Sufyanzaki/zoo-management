@@ -6283,3 +6283,8 @@ textarea.form--control:focus {
     align-items: center;
     padding-right: 20px;
 }
+.active-page{
+    background: rgb(var(--base)) !important;
+    color: white !important;
+    font-weight: bold;
+}

@@ -37,82 +37,90 @@
         <div class="row g-4">
           <div class="col-12">
             <div class="table-responsive--md">
-              <table class="table custom--table">
-                <thead>
-                  <tr>
-                    <th>Ticket Number</th>
-                    <th>Ticket Type</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th class="text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% for(let i=0;i < tickets.length;i++){ %>
-                    <tr id="row_<%= i %>">
-                      <td tickets-label="Ticket Number">
-                        <strong>
-                          <%= tickets[i].ticketNumber %>
-                        </strong>
-                      </td>
-                      <td tickets-label="Ticket Type">
-                        <%= tickets[i].ticketType %>
-                      </td>
-                      <td tickets-label="Price">
-                        <%= tickets[i].price %>PKR
-                      </td>
-                      <td tickets-label="Status">
-                        <%= tickets[i].status %>
-                      </td>
-                      <td tickets-label="Remove" class="text-center">
-                        <a href="tickets/<%= tickets[i]._id %>" class="btn btn--sm btn--base"> Edit </a>
-                        <button class="btn btn--sm btn--base"
-                          onclick="removeRow(<%= i %>, '<%= tickets[i]._id %>')">Remove</button>
-                      </td>
+              <% if(tickets.length > 0){ %>
+                <table class="table custom--table">
+                  <thead>
+                    <tr>
+                      <th>Ticket Number</th>
+                      <th>Ticket Type</th>
+                      <th>Price</th>
+                      <th>Status</th>
+                      <th class="text-center">Actions</th>
                     </tr>
-                    <% } %>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    <% for(let i=0;i < tickets.length;i++){ %>
+                      <tr id="row_<%= i %>">
+                        <td tickets-label="Ticket Number">
+                          <strong>
+                            <%= tickets[i].ticketNumber %>
+                          </strong>
+                        </td>
+                        <td tickets-label="Ticket Type">
+                          <%= tickets[i].ticketType %>
+                        </td>
+                        <td tickets-label="Price">
+                          <%= tickets[i].price %>PKR
+                        </td>
+                        <td tickets-label="Status">
+                          <%= tickets[i].status %>
+                        </td>
+                        <td tickets-label="Remove" class="text-center">
+                          <a href="tickets/<%= tickets[i]._id %>" class="btn btn--sm btn--base"> Edit </a>
+                          <button class="btn btn--sm btn--base"
+                            onclick="removeRow(<%= i %>, '<%= tickets[i]._id %>')">Remove</button>
+                        </td>
+                      </tr>
+                      <% } %>
+                  </tbody>
+                </table>
+                <% }else{ %>
+                  <h2 class="section__title mt-0 text-center">
+                    <span>OOPS!</span>
+                    No tickets yet!
+                </h2>
+                  <% } %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav>
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+    <% if(totalPages > 1){ %>
+      <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                  <% if(currentPage !== 1){ %>
+                  <li class="page-item">
+                    <a class="page-link" href="/tickets?page=<%= currentPage-1 %>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <% } %>
+                 <% for(let i=1;i<=totalPages;i++){%>
+                  <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>" href="/tickets?page=<%= i %>"><%= i %></a></li>
+                  <% } %>
+                  <% if(currentPage !== totalPages){ %>
+                      <li class="page-item">
+                          <a class="page-link" href="/tickets?page=<%= currentPage+1 %>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      <% } %>
+                </ul>
+              </nav>
+            </div>
+          </div>
       </div>
-    </div>
+  <% } %>
   </div>
   <script>
     function removeRow(index, id) {
     fetch(`/tickets/${id}`, {
       method: 'DELETE',
     }).then(response => {
-        if (response.ok) {
-          const rowToRemove = document.getElementById(`row_${index}`);
-          if (rowToRemove) {
-            rowToRemove.remove();
-          }
-        }
+        window.location.reload()
       })
       .catch(error => {
         console.error('Error:', error);

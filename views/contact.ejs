@@ -1,0 +1,117 @@
+<%- include('./components/Layout/Header.ejs') %>
+  <!-- Banner  -->
+  <div class="banner" style="background-image: url(/images/banner-img-3.png)">
+    <div class="banner__content">
+      <div class="container">
+        <div class="row g-3 justify-content-center">
+          <div class="col-lg-10 text-center">
+            <h2 class="mt-0 text--white">Contact Us</h2>
+            <!-- Breadcrumbs  -->
+            <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+              <li class="list--row__item breadcrumbs__item">
+                <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                  Home
+                </a>
+              </li>
+              <li class="list--row__item breadcrumbs__item">
+                <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                  Contact
+                </a>
+              </li>
+            </ul>
+            <!-- Breadcrumbs End -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner End -->
+
+
+  <div class="section--sm section--top">
+    <div class="container">
+      <div class="row g-4 justify-content-between">
+        <div class="col-md-5 col-xl-4">
+          <h4 class="mt-0">
+            How can i help you?
+          </h4>
+          <p class="section__para">
+            Viserlife Zoo is now open daily from 9:30 am–5 pm. Advance timed reservations are required for all guests.
+            We look forward to seeing you!
+          </p>
+          <ul class="list">
+            <li>
+              <div class="d-flex align-items-center border gap-3 px-4 py-2">
+                <span class="d-inline-block text--base xxl-text">
+                  <i class="fas fa-phone-alt"></i>
+                </span>
+                <span class="d-block flex-grow-1">
+                  +92000000000
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="d-flex align-items-center border gap-3 px-4 py-2">
+                <span class="d-inline-block text--base xxl-text">
+                  <i class="far fa-envelope"></i>
+                </span>
+                <span class="d-block flex-grow-1">
+                  <a href="mailto:admin123@gmail.com" class="__cf_email__"
+                    >admin123@gmail.com</a>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="d-flex align-items-center border gap-3 px-4 py-2">
+                <span class="d-inline-block text--base xxl-text">
+                  <i class="fas fa-globe"></i>
+                </span>
+                <span class="d-block flex-grow-1">
+                  www.Viserlife.com
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-7">
+          <div class="zoo-box">
+            <form action="#" class="row g-4">
+              <div class="col-12">
+                <input type="text" class="form-control form--control" placeholder="Name*">
+              </div>
+              <div class="col-12">
+                <input type="email" class="form-control form--control" placeholder="Email Address">
+              </div>
+              <div class="col-12">
+                <input type="text" class="form-control form--control" placeholder="Subject">
+              </div>
+              <div class="col-12">
+                <textarea rows="5" class="form-control form--control" placeholder="Message"></textarea>
+              </div>
+              <div class="col-12">
+                <a href="#" class="btn btn--md btn--base text-uppercase"> Submit Query </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Map Section  -->
+  <div class="section--sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="map-view">
+            <iframe class="map-view__frame"
+              src="https://maps.google.com/maps?q=23.7925,90.4078&amp;hl=es;z=14&amp;output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Map Section End -->
+
+  <%- include('./components/Layout/ClientSection.ejs'); %>
+    <%- include('./components/Layout/NewsLetter.ejs'); %>
+      <%- include('./components/Layout/Footer.ejs'); %>

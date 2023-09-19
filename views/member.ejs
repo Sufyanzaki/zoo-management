@@ -1,0 +1,116 @@
+<%- include('./components/Layout/Header.ejs'); %>
+  <!-- Banner  -->
+  <div class="banner" style="background-image: url(/images/banner-img-2.png)">
+    <div class="banner__content">
+      <div class="container">
+        <div class="row g-3 justify-content-center">
+          <div class="col-lg-10 text-center">
+            <h2 class="mt-0 text--white">Membership Page</h2>
+            <!-- Breadcrumbs  -->
+            <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+              <li class="list--row__item breadcrumbs__item">
+                <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                  Home
+                </a>
+              </li>
+              <li class="list--row__item breadcrumbs__item">
+                <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                  Member
+                </a>
+              </li>
+            </ul>
+            <!-- Breadcrumbs End -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner End -->
+
+  <!-- Membership Plan  -->
+  <div class="section">
+    <div class="section__head">
+      <div class="container">
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-10 col-xl-6">
+            <div class="text-center">
+              <span class="section__particles">
+                <span class="section__subtitle section__subtitle-dash"> Membership Plan </span>
+              </span>
+              <h2 class="section__title">
+                You can be a proud member of <span>Viserlife</span>
+              </h2>
+              <p class="section__para mx-auto mb-0">
+                More than admission, events and parking. Each membership directly supports the care of Viserlife Zoo
+                animals and conservation efforts around the world.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row g-4 g-xxl-5">
+        <% for(let i=0;i<data.length;i++){ %>
+          <div class="col-lg-6">
+            <div class="membership-card">
+              <div class="membership-card__img">
+                <img src="/images/member-img-1.png" alt="image" class="membership-card__img-is" />
+              </div>
+              <div class="membership-card__content">
+                <h4 class="membership-card__price"><%= data[i].name %></h4>
+                <h5 class="membership-card__title"><%= data[i].licenseNumber %></h5>
+                <p class="heading-clr sm-text fw-md text-uppercase">
+                  <%= data[i].name %>
+                </p>
+                <ul class="list list--base">
+                  <li><%= data[i].name %></li>
+                  <li><%= data[i].name %></li>
+                  <li><%= data[i].name %></li>
+                </ul>
+                <div class="mt-4">
+                  <a href="sign-up.html" class="t-link btn btn--md btn--gallery"> Join Now </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+      </div>
+    </div>
+    <% if(totalPages> 1){ %>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="mt-5">
+              <ul class="pagination justify-content-center">
+                <% if(currentPage !==1){ %>
+                  <li class="page-item">
+                    <a class="page-link" href="/animals-list?page=<%= currentPage-1 %>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <% } %>
+                    <% for(let i=1;i<=totalPages;i++){%>
+                      <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>"
+                          href="/animals-list?page=<%= i %>">
+                          <%= i %>
+                        </a></li>
+                      <% } %>
+                        <% if(currentPage !==totalPages){ %>
+                          <li class="page-item">
+                            <a class="page-link" href="/animals-list?page=<%= currentPage+1 %>" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                          <% } %>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>
+  <!-- Membership Plan End -->
+  <%- include('./components/Layout/ClientSection.ejs'); %>
+    <%- include('./components/Layout/NewsLetter.ejs'); %>
+      <%- include('./components/Layout/Footer.ejs'); %>
