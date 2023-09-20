@@ -1,9 +1,10 @@
 
 import Ticket from "./../model/ticketModel.js"
+import User from "../model/userModel.js";
 // Create a new ticket
 export const createTicket = async (req, res) => {
     try {
-        const ticket = await Ticket.create(req.body);
+        await Ticket.create(req.body);
         return res.redirect('/tickets')
     } catch (error) {
         console.log(error)
@@ -36,7 +37,6 @@ export const getTicketById = async (req, res) => {
 
 // Update a ticket by ID
 export const updateTicket = async (req, res) => {
-    console.log(req.params.id, req.body)
     try {
         const ticket = await Ticket.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -62,3 +62,18 @@ export const deleteTicket = async (req, res) => {
         return res.status(500).json({ error: 'Unable to delete the ticket' });
     }
 };
+
+
+// export const reserveTicket = async (req, res) => {
+//     const userId = req.user._id;
+//     const animalId = req.params.id;
+//     try {
+//         const user = await User.findById({
+//             _id : userId
+//         });
+//         user.tickets.push()
+//         return res.status(204).json();
+//     } catch (error) {
+//         return res.status(500).json({ error: 'Unable to delete the ticket' });
+//     }
+// }

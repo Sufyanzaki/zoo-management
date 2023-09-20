@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  reservedTickets: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Ticket"
+}],
   createdAt: {
     type: Date,
     default: Date.now,

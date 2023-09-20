@@ -222,3 +222,33 @@ export const userDoctorList = async (req, res, next) => {
     });
   }
 };
+
+export const userTicketView= async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const itemsPerPage = 10;
+  try {
+    const skip = (page - 1) * itemsPerPage;
+    const tickets = await Doctor.find()
+      .skip(skip)
+      .limit(itemsPerPage);
+
+    const totalTickets = await Ticket.countDocuments();
+    const totalPages = Math.ceil(totalTickets / itemsPerPage);
+
+    res.render("tickets", {
+      tickets,
+      formatDate,
+      user: req.user,
+      currentPage: page,
+      totalPages,
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).render("error", {
+      errors: {
+        title: "No doctors with this ID found",
+        message: "Something went Wrong! Please Contact the Provider id the problem persists"
+      }
+    });
+  }
+}

@@ -5,6 +5,7 @@ import {
   getTicketById,
   updateTicket,
   deleteTicket,
+  // reserveTicket
 } from '../controller/ticketController.js';
 
 import {isAuthenticatedUser, authorizeRoles} from '../middleware/auth.js';
@@ -19,4 +20,6 @@ router.route('/tickets/:id').get(isAuthenticatedUser('strict'), authorizeRoles('
   .post(isAuthenticatedUser('strict'), authorizeRoles('admin'), updateTicket)
   .delete(isAuthenticatedUser('strict'), deleteTicket);
 
+
+// router.route('/reserveTickets:/id').get(isAuthenticatedUser('strict'), reserveTicket)
 export default router;
