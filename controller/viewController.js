@@ -1,7 +1,7 @@
 import Animal from '../model/animalModel.js';
 import Doctor from "../model/doctorModel.js";
 import Ticket from '../model/ticketModel.js';
-import { formatDbDate, formatDate } from '../utils/GeneralFunctions.js';
+import { formatDbDate, formatDate, findMonth} from '../utils/GeneralFunctions.js';
 
 export const homeView = async (req, res, next) => {
   res.render("index", { user: req.user });
@@ -123,13 +123,15 @@ export const createdoctorView = async (req, res, next) => {
 
 export const createTicketsView = async (req, res, next) => {
   const ticketId = req.params.id;
+  const animals = await Animal.find();
   if (ticketId) {
     let tickets = await Ticket.findById({
       _id: ticketId
-    })
-    res.render("admin/createTicket", { tickets, error: null, user: req.user, formatDbDate });
+    }).populate('animal', 'animalName')
+    console.log(tickets)
+    res.render("admin/createTicket", { tickets, error: null, user: req.user, formatDbDate, animals });
   }
-  res.render("admin/createTicket", { tickets: null, error: null, user: req.user, formatDbDate });
+  res.render("admin/createTicket", { tickets: null, error: null, user: req.user, formatDbDate, animals });
 }
 
 export const ticketsView = async (req, res, next) => {
@@ -228,16 +230,16 @@ export const userTicketView= async (req, res, next) => {
   const itemsPerPage = 10;
   try {
     const skip = (page - 1) * itemsPerPage;
-    const tickets = await Doctor.find()
+    const tickets = await Ticket.find().populate('animal', 'images')
       .skip(skip)
       .limit(itemsPerPage);
 
     const totalTickets = await Ticket.countDocuments();
     const totalPages = Math.ceil(totalTickets / itemsPerPage);
-
     res.render("tickets", {
       tickets,
       formatDate,
+      findMonth,
       user: req.user,
       currentPage: page,
       totalPages,

@@ -5,6 +5,8 @@
                 <%= tickets ? 'Update' : 'Add' %> a <span>Ticket</span>
             </h2>
             <form class="row g-4" method="POST" onsubmit="handleSubmit(event)">
+                <span id="error"></span>
+
                 <div class="col-sm-6 col-12">
                     <label for="ticketNumber">Ticket Number</label>
                     <input type="text" class="form-control form--control" placeholder="Ticket Number" id="ticketNumber"
@@ -26,16 +28,42 @@
                         id="entryDateTime" name="entryDateTime" value="<%= formatDbDate(tickets?.entryDateTime) %>"
                         required>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                     <label for="notes">Notes</label>
-                    <textarea class="form-control form--control" placeholder="Notes" id="notes" name="notes"
-                        required><%= tickets?.notes %></textarea>
+                    <textarea class="form-control form--control" style="resize: vertical;" placeholder="Notes"
+                        id="notes" name="notes" required onkeyup="handleChange()"><%= tickets?.notes %></textarea>
                 </div>
+                <div class="col-6">
+                    <label for="animals">Animals</label>
+                    <select class="form-control form--control" aria-label="Default select example" id="animal" name="animal">
+                        <% if(tickets?.animal){ %>
+                            <option value="<%= tickets?.animal._id %>"><%= tickets?.animal.animalName %></option>
+                            <% }else{ %>
+                                <option value="null">-- Choose --</option>
+                                <% } %>
+                        <% for(let i=0;i<animals.length;i++){%>
+                            <option value="<%= animals[i]._id %>"><%= animals[i].animalName %></option>
+                        <% } %>
+                      </select>
+                </div>
+                <span class="mt-1 pe-4" style="font-size: 12px; text-align: right;"><span id="counter">0</span>/193</span>
                 <button class="btn btn--md btn--base w-50 mx-auto" id="submit">Submit</button>
             </form>
         </div>
     </section>
     <script>
+        const error = document.getElementById("error");
+        const counter = document.getElementById("counter")
+
+        counter.innerHTML = <%= tickets?.notes.length || 0 %>;
+
+        function handleChange(e) {
+            const notes = document.getElementById("notes").value;
+            if (notes.length > 193) {
+                error.innerHTML = 'Notes must not exceed 193 digits'
+            }
+            counter.innerHTML = notes.length;
+        }
         function handleSubmit(event) {
             const submitBtn = document.getElementById('submit');
             submitBtn.innerHTML = '<span>Uploading...</span>';
@@ -45,6 +73,15 @@
             const price = document.getElementById("price").value;
             const entryDateTime = document.getElementById("entryDateTime").value;
             const notes = document.getElementById("notes").value;
+            const animal = document.getElementById("animal").value;
+            if (notes.length > 193) {
+                submitBtn.innerHTML = '<span>Submit</span>'
+                return error.innerHTML = 'Notes must not exceed 336 digits'
+            }
+            if(animal === 'null'){
+                submitBtn.innerHTML = '<span>Submit</span>'
+                return error.innerHTML = 'Please select an animal'
+            }
 
             const data = {
                 ticketNumber,
@@ -52,6 +89,7 @@
                 price,
                 entryDateTime,
                 notes,
+                animal
             };
 
             const json = JSON.stringify(data);

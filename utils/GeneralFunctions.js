@@ -50,6 +50,19 @@ export function formatDbDate(mongoDate) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0"); // Add leading zero if needed
   const day = String(date.getDate()).padStart(2, "0"); // Add leading zero if needed;
-
   return `${year}-${month}-${day}`;
+}
+
+export function findMonth(date) {
+  let number = date.split('/')
+  number = parseInt(number[1])
+const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
+];
+if (number >= 1 && number <= 12) {
+    return months[number - 1];
+} else {
+    return 'Invalid month number';
+}
 }
