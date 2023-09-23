@@ -87,7 +87,6 @@ export const removeImages = async (req, res, next) => {
   const userId = req.params.id;
   try {
     const doctor = await Doctor.findById(userId);
-    console.log(doctor)
     doctor.image = '';
     await doctor.save();
     res.status(200).send('Success');

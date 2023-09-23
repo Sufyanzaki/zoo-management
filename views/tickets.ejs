@@ -1,0 +1,112 @@
+<%- include('./components/Layout/Header.ejs'); %>
+  <!-- Banner  -->
+  <div class="banner mb-5" style="background-image: url(/images/banner-img-2.png)">
+    <div class="banner__content">
+      <div class="container">
+        <div class="row g-3 justify-content-center">
+          <div class="col-lg-10 text-center">
+            <h2 class="mt-0 text--white">Membership Page</h2>
+            <!-- Breadcrumbs  -->
+            <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+              <li class="list--row__item breadcrumbs__item">
+                <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                  Home
+                </a>
+              </li>
+              <li class="list--row__item breadcrumbs__item">
+                <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                  Member
+                </a>
+              </li>
+            </ul>
+            <!-- Breadcrumbs End -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner End -->
+<div class="container">
+    <% if(tickets.length > 0){ %>
+        <div class="row g-4">
+            <% for(let i=0;i<tickets.length;i++){%>
+                <div class="col-lg-6">
+                    <div class="event-card">
+                      <div class="event-card__img">
+                        <img src="<%= tickets[i].animal.images[0] %>" alt="image" class="event-card__img-is">
+                        <div class="event-card__date">
+                          <div class="event-card__date-content">
+                            <h5 class="mt-0 mb-1 text-center text--white"><%= formatDate(tickets[i].entryDateTime).split("/")[0] %></h5>
+                            <h6 class="m-0 text-center text--white"><%= findMonth(formatDate(tickets[i].entryDateTime)) %></h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="event-card__content">
+                        <h5 class="event-card__title mb-2">
+                          <span class="t-link event-card__title-link">
+                            Ticket Number : <%= tickets[i].ticketNumber %>
+                          </span>
+                        </h5>
+                        <ul class="list flex-wrap" style="--gap: 0.5rem">
+                          <li>
+                            <span class="t-link t-link--base text-clr sm-text fw-md">
+                              <span class="fw-bold">Entry time : </span><%= formatDate(tickets[i].entryDateTime) %>
+                            </span>
+                          </li>
+                          <li>
+                            <span class="t-link t-link--base text-clr sm-text fw-md">
+                              <span class="fw-bold">Price</span> : <%= tickets[i].price %> PKR
+                            </span>
+                          </li>
+                        </ul>
+                        <p class="mt-2 mb-0" style="font-size: 14px;">
+                          <span class="fw-bold">Notes</span> : <%= tickets[i].notes %>
+                        </p>
+                      </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+        <% }else{%>
+            <h2 class="section__title mt-0 text-center">
+                <span>OOPS!</span>
+                No Ticket yet!
+              </h2>
+            <% } %>
+
+    <% if(totalPages> 1){ %>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                  <% if(currentPage !==1){ %>
+                    <li class="page-item">
+                      <a class="page-link" href="/animals-list?page=<%= currentPage-1 %>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <% } %>
+                      <% for(let i=1;i<=totalPages;i++){%>
+                        <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>"
+                            href="/animals-list?page=<%= i %>">
+                            <%= i %>
+                          </a></li>
+                        <% } %>
+                          <% if(currentPage !==totalPages){ %>
+                            <li class="page-item">
+                              <a class="page-link" href="/animals-list?page=<%= currentPage+1 %>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                            <% } %>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <% } %>
+  </div>
+  <%- include('./components/Layout/ClientSection.ejs'); %>
+  <%- include('./components/Layout/NewsLetter.ejs'); %>
+    <%- include('./components/Layout/Footer.ejs'); %>

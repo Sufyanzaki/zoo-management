@@ -50,32 +50,55 @@
       </div>
     </div>
     <div class="container">
-      <div class="row g-4 g-xxl-5">
-        <% for(let i=0;i<data.length;i++){ %>
-          <div class="col-lg-6">
-            <div class="membership-card">
-              <div class="membership-card__img">
-                <img src="/images/member-img-1.png" alt="image" class="membership-card__img-is" />
-              </div>
-              <div class="membership-card__content">
-                <h4 class="membership-card__price"><%= data[i].name %></h4>
-                <h5 class="membership-card__title"><%= data[i].licenseNumber %></h5>
-                <p class="heading-clr sm-text fw-md text-uppercase">
-                  <%= data[i].name %>
-                </p>
-                <ul class="list list--base">
-                  <li><%= data[i].name %></li>
-                  <li><%= data[i].name %></li>
-                  <li><%= data[i].name %></li>
-                </ul>
-                <div class="mt-4">
-                  <a href="sign-up.html" class="t-link btn btn--md btn--gallery"> Join Now </a>
+      <% if(data.length > 0){ %>
+        <div class="row g-4 g-xxl-5">
+          <% for(let i=0;i<data.length;i++){ %>
+            <div class="col-lg-6">
+              <div class="membership-card px-3">
+                <div class="membership-card__img">
+                  <img src="<%= data[i].image %>" alt="image" class="membership-card__img-is" />
+                </div>
+                <div class="membership-card__content">
+                  <h4 class="membership-card__price">
+                    <%= data[i].name %>
+                  </h4>
+                  <div class="">
+                    <span class="heading-clr sm-text fw-md">License Number : </span>
+                    <h5 class="heading-clr sm-text fw-md d-inline">
+                      <%= data[i].licenseNumber %>
+                    </h5>
+                  </div>
+                  <div class="">
+                    <span class="heading-clr sm-text fw-md">Specialization : </span>
+                    <h5 class="heading-clr sm-text fw-md d-inline">
+                      <%= data[i].specialization %>
+                    </h5>
+                  </div>
+                  <ul class="list list--base mt-2">
+                    <li class="heading-clr sm-text fw-md">
+                      <%= data[i].experience %> Years of experience
+                    </li>
+                    <li class="heading-clr sm-text fw-md">
+                      Graduated from <%= data[i].education %>
+                    </li>
+                    <li class="heading-clr sm-text fw-md">
+                      Contact me on <%= data[i].contactInfo %>
+                    </li>
+                  </ul>
+                  <div class="mt-4">
+                    <a href="tel:555-123-4567" class="t-link btn btn--md btn--gallery"> Join Now </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            <% } %>
+        </div>
+        <% }else{%>
+          <h2 class="section__title mt-0 text-center">
+                <span>OOPS!</span>
+                No Doctors yet!
+              </h2>
           <% } %>
-      </div>
     </div>
     <% if(totalPages> 1){ %>
       <div class="container">

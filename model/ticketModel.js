@@ -35,6 +35,10 @@ const ticketSchema = new mongoose.Schema({
     notes: {
         type: String,
     },
+    animal:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Animal"
+    }
 });
 
 export default mongoose.model('Ticket', ticketSchema);
