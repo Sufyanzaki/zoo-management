@@ -12,7 +12,8 @@ export const registerUser = async (req, res, next) => {
     });
     sendToken(user, 200, res);
   } catch (error) {
-    res.render("sign-up", { error: error.errors.password.message, data:req.user });
+    console.log(error.message)
+    res.render("sign-up", { error: error.errors?.password.message || 'Email Already Taken', user:req.user });
   }
 };
 

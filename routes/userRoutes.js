@@ -10,7 +10,7 @@ import { isAuthenticatedUser, authorizeRoles } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.route("/signup").post(registerUser); //working
+router.route("/signup").post(isAuthenticatedUser('default'),registerUser); //working
 
 router.route("/login").post(loginUser); //working
 
