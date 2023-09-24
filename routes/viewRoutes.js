@@ -14,7 +14,8 @@ import {
   createdoctorView,
   createTicketsView,
   ticketsView,
-  contactView
+  contactView,
+  userTickets
 } from "../controller/viewController.js";
 
 import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth.js';
@@ -44,5 +45,6 @@ router.route("/tickets").get(isAuthenticatedUser('strict'), ticketsView); //work
 router.route("/tickets/create").get(isAuthenticatedUser('strict'), createTicketsView); //working
 router.route("/tickets/:id").get(isAuthenticatedUser('strict'), createTicketsView); //working
 router.route("/tickets-list").get(isAuthenticatedUser('strict'), userTicketView); //working
+router.route("/my-tickets").get(isAuthenticatedUser('strict'), userTickets); //working
 
 export default router;

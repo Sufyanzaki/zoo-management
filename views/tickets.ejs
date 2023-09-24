@@ -27,6 +27,11 @@
   </div>
   <!-- Banner End -->
 <div class="container">
+  <div class="mb-5" style="text-align: end;">
+    <% if(!myTickets){ %>
+      <a href="/my-tickets?page=1" class="btn btn--md btn--base"> My Tickets </a>
+      <% } %>
+  </div>
     <% if(tickets.length > 0){ %>
         <div class="row g-4">
             <% for(let i=0;i<tickets.length;i++){%>
@@ -62,6 +67,9 @@
                         <p class="mt-2 mb-0" style="font-size: 14px;">
                           <span class="fw-bold">Notes</span> : <%= tickets[i].notes %>
                         </p>
+                        <button onclick="reserveTicket('<%=tickets[i]._id%>')" class="btn btn--base w-100 mt-2" style="font-size: 14px;">
+                          <%= user.reservedTickets.includes(tickets[i]._id) ? 'Cancel' : 'Book Now' %>
+                        </a>
                       </div>
                     </div>
                 </div>
@@ -107,6 +115,13 @@
         </div>
         <% } %>
   </div>
+  <script>
+    function reserveTicket(id){
+      fetch(`/reserveTickets/${id}`, {
+    method: 'GET'
+  }).then(()=>window.location.reload())
+    }
+  </script>
   <%- include('./components/Layout/ClientSection.ejs'); %>
   <%- include('./components/Layout/NewsLetter.ejs'); %>
     <%- include('./components/Layout/Footer.ejs'); %>

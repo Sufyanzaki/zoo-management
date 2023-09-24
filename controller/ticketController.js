@@ -64,16 +64,32 @@ export const deleteTicket = async (req, res) => {
 };
 
 
-// export const reserveTicket = async (req, res) => {
-//     const userId = req.user._id;
-//     const animalId = req.params.id;
-//     try {
-//         const user = await User.findById({
-//             _id : userId
-//         });
-//         user.tickets.push()
-//         return res.status(204).json();
-//     } catch (error) {
-//         return res.status(500).json({ error: 'Unable to delete the ticket' });
-//     }
-// }
+export const reserveTicket = async (req, res) => {
+    const userId = req.user._id;
+    const ticketId = req.params.id;
+    try {
+        const user = await User.findById(userId);
+        const ticket = await Ticket.findById(ticketId);
+        if (!user || !ticket) {
+            return res.status(404).json({ error: 'User or ticket not found' });
+        }
+        const isBooked = user.reservedTickets.includes(ticketId);
+        if (!isBooked) {
+            ticket.buyers.push(userId);
+            user.reservedTickets.push(ticketId);
+        }
+        else{
+            const index = user.reservedTickets.indexOf(ticketId);
+            const idx = ticket.buyers.indexOf(userId);
+
+            ticket.buyers.splice(index, 1);
+            user.reservedTickets.splice(index, 1);
+        }
+        await ticket.save();
+        await user.save();
+        return res.status(204).json({ message: 'Success' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Unable to reserve the ticket' });
+    }
+}

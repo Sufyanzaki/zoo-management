@@ -35,10 +35,14 @@ const ticketSchema = new mongoose.Schema({
     notes: {
         type: String,
     },
-    animal:{
+    animal: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Animal"
-    }
+    },
+    buyers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }]
 });
 
 export default mongoose.model('Ticket', ticketSchema);

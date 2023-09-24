@@ -158,6 +158,40 @@ export const ticketsView = async (req, res, next) => {
   }
 }
 
+export const userTickets = async (req, res, next) => {
+  const userId = req.user._id;
+  const page = parseInt(req.query.page) || 1;
+  const itemsPerPage = 10;
+  try {
+    const skip = (page - 1) * itemsPerPage;
+    const tickets = await Ticket.find({
+      buyers: userId
+    }).populate('animal', 'images')
+      .skip(skip)
+      .limit(itemsPerPage);
+
+    const totalTickets = await Ticket.countDocuments();
+    const totalPages = Math.ceil(totalTickets / itemsPerPage);
+    res.render("tickets", {
+      tickets,
+      formatDate,
+      findMonth,
+      user: req.user,
+      currentPage: page,
+      totalPages,
+      myTickets:true
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).render("error", {
+      errors: {
+        title: "No doctors with this ID found",
+        message: "Something went Wrong! Please Contact the Provider id the problem persists"
+      }
+    });
+  }
+}
+
 export const contactView = async (req, res, next) => {
   res.render("contact", { user: req.user });
 }
@@ -243,6 +277,7 @@ export const userTicketView= async (req, res, next) => {
       user: req.user,
       currentPage: page,
       totalPages,
+      myTickets:false
     });
   } catch (err) {
     console.log(err)
