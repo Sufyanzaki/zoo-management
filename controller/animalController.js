@@ -78,6 +78,7 @@ export const removeImages = async(req, res, next) =>{
 
 export const deleteAnimal = async (req, res, next) => {
   const animalId = req.params.id;
+  
   try {
     await Animal.findByIdAndDelete(animalId);
     res.send('Success')

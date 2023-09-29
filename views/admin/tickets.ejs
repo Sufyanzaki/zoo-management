@@ -37,7 +37,7 @@
         <div class="row g-4">
           <div class="col-12">
             <div class="table-responsive--md">
-              <% if(tickets.length > 0){ %>
+              <% if(tickets.length> 0){ %>
                 <table class="table custom--table">
                   <thead>
                     <tr>
@@ -78,54 +78,67 @@
                   <h2 class="section__title mt-0 text-center">
                     <span>OOPS!</span>
                     No tickets yet!
-                </h2>
+                  </h2>
                   <% } %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <% if(totalPages > 1){ %>
+    <% if(totalPages> 1){ %>
       <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <nav class="mt-5">
-                <ul class="pagination justify-content-center">
-                  <% if(currentPage !== 1){ %>
+        <div class="row">
+          <div class="col-12">
+            <nav class="mt-5">
+              <ul class="pagination justify-content-center">
+                <% if(currentPage !==1){ %>
                   <li class="page-item">
                     <a class="page-link" href="/tickets?page=<%= currentPage-1 %>" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <% } %>
-                 <% for(let i=1;i<=totalPages;i++){%>
-                  <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>" href="/tickets?page=<%= i %>"><%= i %></a></li>
-                  <% } %>
-                  <% if(currentPage !== totalPages){ %>
-                      <li class="page-item">
-                          <a class="page-link" href="/tickets?page=<%= currentPage+1 %>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                          </a>
-                        </li>
+                    <% for(let i=1;i<=totalPages;i++){%>
+                      <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>"
+                          href="/tickets?page=<%= i %>">
+                          <%= i %>
+                        </a></li>
                       <% } %>
-                </ul>
-              </nav>
-            </div>
+                        <% if(currentPage !==totalPages){ %>
+                          <li class="page-item">
+                            <a class="page-link" href="/tickets?page=<%= currentPage+1 %>" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                          <% } %>
+              </ul>
+            </nav>
           </div>
+        </div>
       </div>
-  <% } %>
+      <% } %>
   </div>
   <script>
     function removeRow(index, id) {
-    fetch(`/tickets/${id}`, {
-      method: 'DELETE',
-    }).then(response => {
-        window.location.reload()
+      const urlParams = new URLSearchParams(window.location.search);
+      fetch(`/tickets/${id}`, {
+        method: 'DELETE',
+      }).then(response => {
+        let totalRows = document.querySelectorAll('tbody tr').length;
+        if (totalRows > 1) {
+          window.location.reload();
+        } else if (urlParams.has('page') && Number(urlParams.get('page')) > 1) {
+          const currentPage = Number(urlParams.get('page'));
+          window.location.href = `/tickets?page=${currentPage - 1}`;
+        } else {
+          window.location.reload();
+        }
       })
-      .catch(error => {
-        console.error('Error:', error);
-      })}
-</script>
+        .catch(error => {
+          console.error('Error:', error);
+        })
+    }
+  </script>
   <%- include('../components/Layout/ClientSection.ejs'); %>
     <%- include('../components/Layout/NewsLetter.ejs'); %>
       <%- include('../components/Layout/Footer.ejs'); %>

@@ -120,10 +120,19 @@
   </div>
   <script>
     function removeRow(index, id) {
+      const urlParams = new URLSearchParams(window.location.search);
       fetch(`/doctor/${id}`, {
         method: 'DELETE',
       }).then(response => {
-        window.location.reload();
+        let totalRows = document.querySelectorAll('tbody tr').length;
+        if (totalRows > 1) {
+          window.location.reload();
+        } else if (urlParams.has('page') && Number(urlParams.get('page')) > 1) {
+          const currentPage = Number(urlParams.get('page'));
+          window.location.href = `/doctors?page=${currentPage - 1}`;
+        } else {
+          window.location.reload();
+        }
       })
         .catch(error => {
           console.error('Error:', error);

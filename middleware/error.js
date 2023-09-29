@@ -1,4 +1,5 @@
 const errorMiddleware = (err, req, res, next) => {
+  console.log(err)
   const errors = Object.values(err.errors).map(error => error.message);
   res.locals.errors = errors;
   errors.push("Internal Server Error")
