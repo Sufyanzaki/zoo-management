@@ -5769,7 +5769,7 @@ textarea.form--control:focus {
 .footer {
     position: relative;
     isolation: isolate;
-    background-image: url("../images/footer-bg.png");
+    background-image: url("../images/footer-bg.webp");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -5827,7 +5827,7 @@ textarea.form--control:focus {
         position: absolute;
         left: -40px;
         bottom: -90px;
-        background-image: url(../images/welcome-img.png);
+        background-image: url(../images/welcome-img.webp);
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -5842,7 +5842,7 @@ textarea.form--control:focus {
 .info-section {
     position: relative;
     isolation: isolate;
-    background-image: url(../images/info-bg.png);
+    background-image: url(../images/info-bg.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -5885,7 +5885,6 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .info-section__container::before {
-        content: url(../images/info-img-1.png);
         position: absolute;
         left: 0;
         bottom: -9px;
@@ -5895,7 +5894,6 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .info-section__container::after {
-        content: url(../images/info-img-2.png);
         position: absolute;
         right: 0;
         bottom: -9px;
@@ -5912,7 +5910,6 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .fact-section-container::before {
-        content: url(../images/fact-img-1.png);
         position: absolute;
         left: 0;
         top: 0;
@@ -5923,7 +5920,6 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .fact-section-container::after {
-        content: url(../images/fact-img-2.png);
         position: absolute;
         right: 0;
         bottom: -9px;
@@ -5934,7 +5930,7 @@ textarea.form--control:focus {
 .fact-section {
     position: relative;
     isolation: isolate;
-    background-image: url(../images/fact-bg.png);
+    background-image: url(../images/fact-bg.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -5958,7 +5954,7 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .membership-section::before {
-        content: url(../images/membership-img-1.png);
+        content: url(../images/membership-img-1.webp);
         position: absolute;
         left: 0;
         top: 0;
@@ -5981,7 +5977,7 @@ textarea.form--control:focus {
 .feedback-section {
     position: relative;
     isolation: isolate;
-    background-image: url(../images/feedback-bg.png);
+    background-image: url(../images/feedback-bg.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -6009,7 +6005,6 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .feedback-section__wrapper::before {
-        content: url(../images/feedback-img-1.png);
         position: absolute;
         left: 0;
         top: 0;
@@ -6019,7 +6014,6 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 1920px) {
     .feedback-section__wrapper::after {
-        content: url(../images/feedback-img-2.png);
         position: absolute;
         right: 0;
         bottom: -9px;
@@ -6086,7 +6080,7 @@ textarea.form--control:focus {
         position: absolute;
         left: 0;
         bottom: 0;
-        background-image: url(../images/welcome-img.png);
+        background-image: url(../images/welcome-img.webp);
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
