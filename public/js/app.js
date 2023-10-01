@@ -383,8 +383,13 @@ $(window).on("scroll", function () {
   }
 });
 
-$(window).on("load", function () {
-  // Preloader
+// Function to hide the loader
+function hideLoader() {
   var preLoder = $(".preloader");
   preLoder.fadeOut(1000);
+}
+
+// Hide the loader as soon as the HTML content is loaded
+$(document).ready(function () {
+  hideLoader();
 });
