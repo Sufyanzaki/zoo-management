@@ -140,51 +140,51 @@
     });
     // Search Popup End
 
-    // Filterizer
-    var filterizd = $(".filter-container");
-    if (filterizd.length) {
-      filterizd.filterizr({
-        //options object
-        layout: "sameWidth",
-        gutterPixels: 15,
-      });
-    }
+    // // Filterizer
+    // var filterizd = $(".filter-container");
+    // if (filterizd.length) {
+    //   filterizd.filterizr({
+    //     //options object
+    //     layout: "sameWidth",
+    //     gutterPixels: 15,
+    //   });
+    // }
     // Filterizer End
 
-    // Magnific Popup
-    var magPhoto = $(".show-img");
-    if (magPhoto.length) {
-      magPhoto.each(function () {
-        $(this).magnificPopup({
-          gallery: {
-            enabled: true,
-          },
-          type: "image",
-          delegate: "a",
-        });
-      });
-    }
+    // // Magnific Popup
+    // var magPhoto = $(".show-img");
+    // if (magPhoto.length) {
+    //   magPhoto.each(function () {
+    //     $(this).magnificPopup({
+    //       gallery: {
+    //         enabled: true,
+    //       },
+    //       type: "image",
+    //       delegate: "a",
+    //     });
+    //   });
+    // }
     // Magnific Popup End
 
-    // Counter Up by Odometer
-    let counterUp = $(".counter-card");
-    if (counterUp) {
-      counterUp.each(function () {
-        $(this).isInViewport(function (status) {
-          if (status === "entered") {
-            for (
-              var i = 0;
-              i < document.querySelectorAll(".odometer").length;
-              i++
-            ) {
-              var el = document.querySelectorAll(".odometer")[i];
-              el.innerHTML = el.getAttribute("data-odometer-final");
-            }
-          }
-        });
-      });
-    }
-    // Counter Up by Odometer End
+    // // Counter Up by Odometer
+    // let counterUp = $(".counter-card");
+    // if (counterUp) {
+    //   counterUp.each(function () {
+    //     $(this).isInViewport(function (status) {
+    //       if (status === "entered") {
+    //         for (
+    //           var i = 0;
+    //           i < document.querySelectorAll(".odometer").length;
+    //           i++
+    //         ) {
+    //           var el = document.querySelectorAll(".odometer")[i];
+    //           el.innerHTML = el.getAttribute("data-odometer-final");
+    //         }
+    //       }
+    //     });
+    //   });
+    // }
+    // // Counter Up by Odometer End
 
     // Feedback Slider
     let feedbackSlider = $(".feedback-slider");
@@ -214,25 +214,25 @@
     }
     // Feedback Slider End
 
-    // Counter Up by Odometer
-    let counterList = $(".counter-list__card");
-    if (counterList) {
-      counterList.each(function () {
-        $(this).isInViewport(function (status) {
-          if (status === "entered") {
-            for (
-              var i = 0;
-              i < document.querySelectorAll(".odometer").length;
-              i++
-            ) {
-              var el = document.querySelectorAll(".odometer")[i];
-              el.innerHTML = el.getAttribute("data-odometer-final");
-            }
-          }
-        });
-      });
-    }
-    // Counter Up by Odometer End
+    // // Counter Up by Odometer
+    // let counterList = $(".counter-list__card");
+    // if (counterList) {
+    //   counterList.each(function () {
+    //     $(this).isInViewport(function (status) {
+    //       if (status === "entered") {
+    //         for (
+    //           var i = 0;
+    //           i < document.querySelectorAll(".odometer").length;
+    //           i++
+    //         ) {
+    //           var el = document.querySelectorAll(".odometer")[i];
+    //           el.innerHTML = el.getAttribute("data-odometer-final");
+    //         }
+    //       }
+    //     });
+    //   });
+    // }
+    // // Counter Up by Odometer End
 
     // Feedback Slider
     let testimonialSlider = $(".testimonial-slider");
