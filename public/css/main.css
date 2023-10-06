@@ -336,7 +336,7 @@ input[type=number] {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(../images/hero.png);
+    background-image: url(../images/hero.webp);
     z-index: 2;
 }
 
@@ -6231,7 +6231,7 @@ textarea.form--control:focus {
         top: 0;
         bottom: 0;
         left: 30%;
-        background-image: url(../images/hero.png);
+        background-image: url(../images/hero.webp);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -6255,7 +6255,7 @@ textarea.form--control:focus {
         top: 0;
         bottom: 0;
         right: 30%;
-        background-image: url(../images/signup-img.png);
+        background-image: url(../images/signup-img.webp);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

@@ -33,7 +33,7 @@ export const loginUser = async (req, res, next) => {
     errors.push("Invalid email or password");
   }
   if (errors.length > 0) {
-    res.render("sign-in", { errors, data:req.user });
+    res.render("sign-in", { errors, user:req.user });
     return;
   }
   sendToken(user, 200, res);
