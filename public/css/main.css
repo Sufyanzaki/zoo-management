@@ -3051,8 +3051,12 @@ textarea.form--control:focus {
 }
 
 .event-card__img {
+    height: 200px;
     position: relative;
     isolation: isolate;
+}
+.event-card__img img{
+    object-fit: cover;
 }
 
 @media screen and (min-width: 768px) {
@@ -3259,7 +3263,7 @@ textarea.form--control:focus {
 
 @media screen and (min-width: 768px) {
     .subscribe-section {
-        margin-top: -133px;
+        margin-top: -83px;
         margin-bottom: 0;
         clip-path: polygon(100% 0, 100% 80%, 48% 100%, 0 80%, 0 0);
         position: relative;
