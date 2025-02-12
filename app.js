@@ -60,6 +60,7 @@ import viewsRoutes from "./routes/viewRoutes.js";
 import animalRoutes from "./routes/animalRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 import sendToken from './utils/jwtToken.js';
+import staffRoutes from "./routes/staffRoutes.js";
 
 app.use(errorMiddleware);
 
@@ -68,6 +69,7 @@ app.use("/", userRoutes);
 app.use("/", ticketRoutes)
 app.use("/", animalRoutes);
 app.use("/", doctorRoutes);
+app.use("/", staffRoutes);
 
 app.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 

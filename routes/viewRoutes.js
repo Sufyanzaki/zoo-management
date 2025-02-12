@@ -1,24 +1,27 @@
 import express from 'express';
 import {
-  homeView,
-  loginView,
-  faqView,
-  signupView,
-  userDoctorList,
   animalDetailView,
-  userTicketView,
   animalsView,
-  userAnimalView,
-  detailView,
-  doctorView,
+  contactView,
   createdoctorView,
   createTicketsView,
+  detailView,
+  doctorView,
+  faqView,
+  homeView,
+  loginView,
+  signupView,
+  staffView,
   ticketsView,
-  contactView,
-  userTickets
+  userAnimalView,
+  userDoctorList,
+  userTickets,
+  userTicketView,
+  staffDetailView
 } from "../controller/viewController.js";
 
-import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth.js';
+import {authorizeRoles, isAuthenticatedUser} from '../middleware/auth.js';
+
 const router = express.Router();
 
 router.route("/").get(isAuthenticatedUser('default'), homeView); //working
@@ -40,6 +43,10 @@ router.route("/animal-detail/:id").get(isAuthenticatedUser('default'), detailVie
 router.route("/doctors").get(isAuthenticatedUser('strict'), doctorView); //working
 router.route("/doctors/create").get(isAuthenticatedUser('strict'), createdoctorView); //working
 router.route("/doctors/:id").get(isAuthenticatedUser('strict'), createdoctorView); //working
+
+router.route("/staff").get(isAuthenticatedUser('strict'), staffView); //working
+router.route("/staff-details").get(isAuthenticatedUser('default'), staffDetailView); //working
+router.route("/staff-details/:id").get(isAuthenticatedUser('default'), authorizeRoles('admin'), staffDetailView); //working
 
 router.route("/tickets").get(isAuthenticatedUser('strict'), ticketsView); //working
 router.route("/tickets/create").get(isAuthenticatedUser('strict'), createTicketsView); //working

@@ -1,0 +1,145 @@
+<%- include('../components/Layout/Header.ejs'); %>
+<div class="banner" style="background-image: url(images/banner-img-3.webp)">
+    <div class="banner__content">
+        <div class="container">
+            <div class="row g-3 justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h2 class="mt-0 text--white">All Staff</h2>
+                    <!-- Breadcrumbs  -->
+                    <ul class="list list--row breadcrumbs justify-content-center" style="--gap: 2rem">
+                        <li class="list--row__item breadcrumbs__item">
+                            <a href="index-2.html" class="t-link breadcrumbs__link text--white">
+                                Home
+                            </a>
+                        </li>
+                        <li class="list--row__item breadcrumbs__item">
+                            <a href="contact.html" class="t-link breadcrumbs__link text--white">
+                                All Staff
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Breadcrumbs End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner End -->
+
+
+<!-- Ticket  -->
+<div class="section--sm section--top">
+    <div class="container">
+        <a href="/staff-details" class="btn btn--md btn--base w-25 d-block mb-4 ms-auto">Add Staff Member</a>
+        <div class="row g-4">
+            <div class="col-12">
+                <% if (data.length > 0) { %>
+                    <div class="table-responsive--md">
+                        <table class="table custom--table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Shift</th>
+                                <th>Date of Joining</th>
+                                <th>Salary</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for (let i = 0; i < data.length; i++) { %>
+                                <tr id="row_<%= i %>">
+                                    <td data-label="Name">
+                                        <strong>
+                                            <%= data[i].name %>
+                                        </strong>
+                                    </td>
+                                    <td data-label="Role">
+                                        <%= data[i].role %>
+                                    </td>
+                                    <td data-label="Shift">
+                                        <%= data[i].shift %>
+                                    </td>
+                                    <td data-label="Date of Joining">
+                                        <%= formatDate(data[i].dateOfJoining) %>
+                                    </td>
+                                    <td data-label="Salary">
+                                        $<%= data[i].salary %>
+                                    </td>
+                                    <td data-label="Actions" class="text-center">
+                                        <a href="staff-details/<%= data[i]._id %>" class="btn btn--sm btn--base">Edit</a>
+                                        <button class="btn btn--sm btn--base"
+                                                onclick="removeRow(<%= i %>, '<%= data[i]._id %>')">Remove</button>
+                                    </td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <h2 class="section__title mt-0 text-center">
+                        <span>OOPS!</span> No Staff yet!
+                    </h2>
+                <% } %>
+            </div>
+
+        </div>
+    </div>
+
+    <% if(totalPages> 1){ %>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <% if(currentPage !==1){ %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/staff?page=<%= currentPage-1 %>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            <% } %>
+                            <% for(let i=1;i<=totalPages;i++){%>
+                                <li class="page-item"><a class="page-link <%= i === currentPage ? 'active-page' : '' %>"
+                                                         href="/staff?page=<%= i %>">
+                                        <%= i %>
+                                    </a></li>
+                            <% } %>
+                            <% if(currentPage !==totalPages){ %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/staff?page=<%= currentPage+1 %>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+<script>
+    function removeRow(index, id) {
+        const urlParams = new URLSearchParams(window.location.search);
+        fetch(`/staff/${id}`, {
+            method: 'DELETE',
+        }).then(response => {
+            let totalRows = document.querySelectorAll('tbody tr').length;
+            if (totalRows > 1) {
+                window.location.reload();
+            } else if (urlParams.has('page') && Number(urlParams.get('page')) > 1) {
+                const currentPage = Number(urlParams.get('page'));
+                window.location.href = `/staff?page=${currentPage - 1}`;
+            } else {
+                window.location.reload();
+            }
+        })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+    }
+</script>
+
+<%- include('../components/Layout/NewsLetter.ejs'); %>
+<%- include('../components/Layout/Footer.ejs'); %>

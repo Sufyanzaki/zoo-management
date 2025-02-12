@@ -1,7 +1,8 @@
+import Staff from '../model/staffModal.js';
 import Animal from '../model/animalModel.js';
 import Doctor from "../model/doctorModel.js";
 import Ticket from '../model/ticketModel.js';
-import { formatDbDate, formatDate, findMonth} from '../utils/GeneralFunctions.js';
+import {findMonth, formatDate, formatDbDate} from '../utils/GeneralFunctions.js';
 
 export const homeView = async (req, res, next) => {
   res.render("index", { user: req.user });
@@ -60,6 +61,35 @@ export const animalsView = async (req, res, next) => {
     });
   }
 };
+export const staffView = async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const itemsPerPage = 10;
+  try {
+    const skip = (page - 1) * itemsPerPage;
+    const staffArr = await Staff.find()
+        .skip(skip)
+        .limit(itemsPerPage);
+
+    const totalStaff = await Staff.countDocuments();
+    const totalPages = Math.ceil(totalStaff / itemsPerPage);
+
+    res.render("admin/staff", {
+      data: staffArr,
+      formatDate,
+      user: req.user,
+      currentPage: page,
+      totalPages,
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).render("error", {
+      errors: {
+        title: "No Staff with this ID found",
+        message: "Something went Wrong! Please Contact the Provider id the problem persists"
+      }
+    });
+  }
+};
 export const detailView = async (req, res, next) => {
   const params = req.params.id;
   try {
@@ -85,6 +115,25 @@ export const detailView = async (req, res, next) => {
   }
 };
 
+export const staffDetailView = async (req, res, next) => {
+  const params = req.params.id;
+  try {
+    if (params) {
+      const animal = await Staff.findById(params);
+      res.render("admin/staff-details", { error: null, data: animal, user: req.user });
+    } else {
+      res.render("admin/staff-details", { error: null, data: null, user: req.user });
+    }
+  } catch (error) {
+    console.error("Error fetching staff:", error);
+    res.status(500).render("error", {
+      errors: {
+        title: "No staff with this ID found",
+        message: "Something went Wrong! Please Contact the Provider id the problem persists"
+      }
+    });
+  }
+};
 export const doctorView = async (req, res, next) => {
 
   const page = parseInt(req.query.page) || 1;
@@ -228,7 +277,6 @@ export const userAnimalView = async (req, res, next) => {
     });
   }
 };
-
 export const userDoctorList = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const itemsPerPage = 10;

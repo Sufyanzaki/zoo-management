@@ -1,0 +1,165 @@
+<%- include('../components/Layout/Header.ejs'); %>
+<section class="py-5">
+    <div class="container">
+        <h2 class="section__title text-center mb-5">
+            <%= data ? 'Update' : 'Add' %> <span>Staff</span>
+        </h2>
+        <form class="row g-4" method="POST" onsubmit="handleSubmit(event)">
+            <div class="col-sm-6 col-12">
+                <input type="text" class="form-control form--control" placeholder="Full Name" id="name"
+                       name="name" required value="<%= data?.name || '' %>">
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="email" class="form-control form--control" placeholder="Email" id="email"
+                       name="email" required value="<%= data?.email || '' %>">
+            </div>
+            <% if (!data) { %>
+                <div class="col-sm-6 col-12">
+                    <input type="password" class="form-control form--control" placeholder="Password" id="password"
+                           name="password" required>
+                </div>
+            <% } %>
+
+            <div class="col-sm-6 col-12">
+                <select class="form-control form--control" id="role" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="Admin" <%= data?.role === 'Admin' ? 'selected' : '' %>>Admin</option>
+                    <option value="Veterinarian" <%= data?.role === 'Veterinarian' ? 'selected' : '' %>>Veterinarian</option>
+                    <option value="Zookeeper" <%= data?.role === 'Zookeeper' ? 'selected' : '' %>>Zookeeper</option>
+                    <option value="Ticketing" <%= data?.role === 'Ticketing' ? 'selected' : '' %>>Ticketing</option>
+                    <option value="Security" <%= data?.role === 'Security' ? 'selected' : '' %>>Security</option>
+                    <option value="Guide" <%= data?.role === 'Guide' ? 'selected' : '' %>>Guide</option>
+                </select>
+            </div>
+            <div class="col-sm-6 col-12">
+                <select class="form-control form--control" id="shift" name="shift" required>
+                    <option value="">Select Shift</option>
+                    <option value="Morning" <%= data?.shift === 'Morning' ? 'selected' : '' %>>Morning</option>
+                    <option value="Afternoon" <%= data?.shift === 'Afternoon' ? 'selected' : '' %>>Afternoon</option>
+                    <option value="Night" <%= data?.shift === 'Night' ? 'selected' : '' %>>Night</option>
+                </select>
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="number" class="form-control form--control" placeholder="Salary" id="salary"
+                       name="salary" required value="<%= data?.salary || '' %>">
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="date" class="form-control form--control" id="dateOfJoining" name="dateOfJoining"
+                       value="<%= data?.dateOfJoining ? data.dateOfJoining.toISOString().split('T')[0] : '' %>">
+            </div>
+            <div class="col-sm-6 col-12">
+                <input type="tel" class="form-control form--control" placeholder="Phone" id="phone"
+                       name="phone" required value="<%= data?.phone || '' %>">
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control form--control" placeholder="Address" id="address"
+                       name="address" value="<%= data?.address || '' %>">
+            </div>
+            <div class="col-12">
+                <select class="form-control form--control" id="status" name="status">
+                    <option value="Active" <%= data?.status === 'Active' ? 'selected' : '' %>>Active</option>
+                    <option value="Inactive" <%= data?.status === 'Inactive' ? 'selected' : '' %>>Inactive</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <i class="las la-image" style="font-size: 24px" onclick="openImageInput()"></i>
+                <input type="file" id="imageInput" accept="image/*" onchange="handleImageUpload()" style="display: none;">
+            </div>
+            <div class="col-12">
+                <div class="loaded-images">
+                    <% if (data?.image) { %>
+                        <img src="<%= data.image %>" alt="" onclick="handleClick()"/>
+                    <% } %>
+                </div>
+                <div id="imagePreview"></div>
+            </div>
+            <button type="submit" class="btn btn--md btn--base w-50 mx-auto" id="submit">Submit</button>
+        </form>
+
+
+    </div>
+</section>
+<script>
+    const imageInput = document.getElementById("imageInput");
+    const imageContainer = document.getElementById("imagePreview");
+
+    function openImageInput() {
+        imageInput.click();
+    }
+
+    function handleClick() {
+        const spinner = document.querySelector('.spinner');
+        spinner.classList.add('show-spinner');
+        let imageContainer = document.querySelector(".loaded-images");
+        let imageToRemove = imageContainer.children[0];
+        imageContainer.removeChild(imageToRemove);
+
+        fetch(`/staffImage/<%= data?._id %>`, {
+            method: 'GET'
+        }).then(() => spinner.classList.remove('show-spinner'))
+            .catch(error => console.error("Error removing image:", error));
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const submitBtn = document.getElementById('submit');
+        submitBtn.innerHTML = '<span>Uploading...</span>';
+        submitBtn.disabled = true;
+
+        // Collect form data
+        const formData = new FormData();
+        formData.append('name', document.getElementById("name").value);
+        formData.append('email', document.getElementById("email").value);
+        formData.append('password', document.getElementById("password")?.value);
+        formData.append('role', document.getElementById("role").value);
+        formData.append('shift', document.getElementById("shift").value);
+        formData.append('salary', document.getElementById("salary").value);
+        formData.append('dateOfJoining', document.getElementById("dateOfJoining").value);
+        formData.append('phone', document.getElementById("phone").value);
+        formData.append('address', document.getElementById("address").value);
+        formData.append('status', document.getElementById("status").value);
+
+        // Handle Image Uploads
+        const selectedFile = imageInput.files[0];
+       if(selectedFile){
+           const fileName = `${Date.now()}_${selectedFile.name}`;
+           formData.append("image", selectedFile, fileName);
+       }
+
+        // Send data
+        fetch('<%= data ? `/staff/${data._id}` : `/staff` %>', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(result => {
+                submitBtn.innerHTML = '<span>Submit</span>';
+                submitBtn.disabled = false;
+                window.location.href = '/staff?page=1';
+            })
+            .catch(error => {
+                console.error("Submission error:", error);
+                submitBtn.innerHTML = '<span>Submit</span>';
+                submitBtn.disabled = false;
+            });
+    }
+
+    function handleImageUpload() {
+        let loadedImages = document.querySelector(".loaded-images");
+
+        imageContainer.innerHTML = '';
+        loadedImages.innerHTML = '';
+        const file = imageInput.files[0];
+
+        if (file && file.type.startsWith("image/")) {
+            const imageElement = document.createElement("img");
+            imageElement.src = URL.createObjectURL(file);
+            imageElement.classList.add("uploaded-image");
+            imageContainer.appendChild(imageElement);
+        }
+    }
+</script>
+
+<%- include('../components/Layout/NewsLetter.ejs'); %>
+<%- include('../components/Layout/Footer.ejs'); %>
+
